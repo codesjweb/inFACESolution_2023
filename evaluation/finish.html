@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">  
+  <title>inFACE - AI 면접솔루션</title>
+  <meta name="author" content="EDUCE(에듀스)">
+  <meta name="keywords" content="EDUCE, inFACE, AI 채용 대비 시뮬레이터, AI 자소서/면접 플랫폼">
+	<meta name="description" content="inFACE는 인공지능 기반으로 면접과 성향분석, 다면역량평가가 
+  가능한 플랫폼입니다.">
+  <meta name="twitter:title" content="inFACE - AI 면접솔루션">
+  <meta name="twitter:description" content="inFACE는 인공지능 기반으로 면접과 성향분석, 다면역량평가가 가능한 플랫폼입니다.">
+  <!-- 이미지 주소 수정해 주세요 -->
+  <meta name="twitter:image" content="http://code-heim.com/images/sns_present.png">
+  <meta property="og:title" content="inFACE - AI 면접솔루션">
+  <meta property="og:description" content="inFACE는 인공지능 기반으로 면접과 성향분석, 다면역량평가가 가능한 플랫폼입니다.">
+  <meta property="og:url" content="https://inface.ai/educe/evaluation">
+  <meta property="og:type" content="website">
+  <!-- 이미지 주소 수정해 주세요 -->
+  <meta property="og:image" content="http://code-heim.com/images/sns_present.png">
+  <link rel="shortcut icon" href="/images/favicon.ico">
+  <link rel="stylesheet" href="/css/common.css">
+  <script src="/js/jquery-3.4.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.3/lottie.min.js"></script>
+</head>
+<body class="sol_body">
+  <!-- header include -->
+  <div id="header"></div>
+
+  <div class="wrapper">
+    <div class="inner">
+      <div class="finish_wrap">
+        <div class="finish_img ani_fadeinup ani_step01">
+          <img src="/images/img_flag.png" alt="">
+          <div id="aniFinish" class="lottie_finish"></div>
+        </div>
+        <div class="txt_ani_row">
+          <div class="txt_wrap txt_wrap_finish">
+            <p class="wait_txt01">수고하셨습니다.</p>
+          </div>        
+        </div>
+        <p class="finish_desc ani_fadeinup ani_step05">이제 모든 AI 면접을 마쳤습니다.<br> 아래 나의 inFACE를 눌러 결과지를 확인해 보시기 바랍니다.</p>
+        <div class="btn_row_single ani_fadeinup ani_step05">
+          <a href="">
+            <button class="btn_blue btn_blue_large">나의 inFACE</button>
+          </a>
+        </div>      
+
+        <!-- 임시버튼 : 
+          성향분석 단계 섹션으로 이동, 
+          개발단계에서 삭제해 주세요 -->
+          <a href="/evaluation/tendency.html">
+            <button class="btn_tempo">임시버튼  성향분석 시작 알림</button>    
+          </a>      
+      </div>
+    </div>
+  </div>
+
+  <script>
+
+    //header include
+    $("#header").load("/include/header.html");   
+
+    //gnb init
+    let showGnb = true;
+    let onStep;
+
+    // Lottie 애니메이션
+    function loadLottieAnimation() {
+      var animation = lottie.loadAnimation({
+        container: document.getElementById('aniFinish'), 
+        renderer: 'svg', 
+        loop: true, 
+        autoplay: true, 
+        path: '/images/ani_finish.json',
+      });
+    }
+    setTimeout(loadLottieAnimation, 1900);
+
+  </script>
+ 
+</body>
+</html>

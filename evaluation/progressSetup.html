@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">  
+  <title>환경점검 | inFACE - AI 면접솔루션</title>
+  <meta name="author" content="EDUCE(에듀스)">
+  <meta name="keywords" content="EDUCE, inFACE, AI 채용 대비 시뮬레이터, AI 자소서/면접 플랫폼">
+	<meta name="description" content="inFACE는 인공지능 기반으로 면접과 성향분석, 다면역량평가가 
+  가능한 플랫폼입니다.">
+  <meta name="twitter:title" content="inFACE - AI 면접솔루션">
+  <meta name="twitter:description" content="inFACE는 인공지능 기반으로 면접과 성향분석, 다면역량평가가 가능한 플랫폼입니다.">
+  <!-- 이미지 주소 수정해 주세요 -->
+  <meta name="twitter:image" content="http://code-heim.com/images/sns_present.png">
+  <meta property="og:title" content="inFACE - AI 면접솔루션">
+  <meta property="og:description" content="inFACE는 인공지능 기반으로 면접과 성향분석, 다면역량평가가 가능한 플랫폼입니다.">
+  <meta property="og:url" content="https://inface.ai/educe/evaluation">
+  <meta property="og:type" content="website">
+  <!-- 이미지 주소 수정해 주세요 -->
+  <meta property="og:image" content="http://code-heim.com/images/sns_present.png">
+  <link rel="shortcut icon" href="/images/favicon.ico">
+  <link rel="stylesheet" href="/css/common.css">
+  <script src="/js/jquery-3.4.1.min.js"></script>
+  <script src="/js/Sortable.min.js"></script>
+</head>
+<body class="sol_body">
+  <!-- header include -->
+  <div id="header"></div>
+
+  <div class="wrapper">
+    <div class="inner">
+      <h2 class="page_tit">진행단계 설정</h2>
+      <div class="cont_wrap">
+        <ul class="progress">
+          <li>
+            <span class="prog_num">01</span>
+            <div class="prog_info">
+              <p>진행시간</p>
+              <p>약 6분</p>
+            </div>
+            <p class="prog_ico">
+              <img src="/images/img_test_basic.png" alt="기본면접">
+            </p>
+            <p class="prog_tit">기본면접</p>
+            <p class="prog_desc">기본 면접은 3개의 질문이 주어지며 지문당 30초의 대기시간과 90초의 답변 시간이 주어집니다.</p>
+            <div class="prog_btn">
+              <button class="btn_set_basic btn_trans">설정</button>
+              <button class="btn_select">
+                <span class="select_ok">선택하기</span>
+                <span class="select_cancel">선택취소</span>
+              </button>
+            </div>
+          </li>
+          <li>
+            <span class="prog_num">02</span>
+            <div class="prog_info">
+              <p>진행시간</p>
+              <p>약 10분</p>
+            </div>
+            <p class="prog_ico">
+              <img src="/images/img_test_tncy.png" alt="성향분석">
+            </p>
+            <p class="prog_tit">성향분석</p>
+            <p class="prog_desc">인성·역량·상황판단 등 응시자의 성향을 체크합니다. 총 110 문항으로 구성된 검사입니다.</p>
+            <div class="prog_btn">
+              <button class="btn_select">
+                <span class="select_ok">선택하기</span>
+                <span class="select_cancel">선택취소</span>
+              </button>
+            </div>
+          </li>
+          <li>
+            <span class="prog_num">03</span>
+            <div class="prog_info">
+              <p>진행시간</p>
+              <p>약 2분</p>
+            </div>
+            <p class="prog_ico">
+              <img src="/images/img_test_empa.png" alt="공감능력">
+            </p>
+            <p class="prog_tit">공감능력</p>
+            <p class="prog_desc">제시되는 인물 사진의 감정을 맞히는 검사이며, 2분동안 공감능력을 평가하게 됩니다.</p>
+            <div class="prog_btn">
+              <button class="btn_select">
+                <span class="select_ok">선택하기</span>
+                <span class="select_cancel">선택취소</span>
+              </button>
+            </div>
+          </li>
+          <li>
+            <span class="prog_num">04</span>
+            <div class="prog_info">
+              <p>진행시간</p>
+              <p>약 8분</p>
+            </div>
+            <p class="prog_ico">
+              <img src="/images/img_test_mind.png" alt="의사결정">
+            </p>
+            <p class="prog_tit">의사결정</p>
+            <p class="prog_desc">응시자의 의사 결정 유형을 파악하는 검사이며,<br> 2 종류의 검사가 진행됩니다.</p>
+            <div class="prog_btn">
+              <button class="btn_select">
+                <span class="select_ok">선택하기</span>
+                <span class="select_cancel">선택취소</span>
+              </button>
+            </div>
+          </li>
+          <!-- 게임을 선택하고 난뒤에 선택한 게임이 있으면 아래, li 에 'selected_li' 클래스를 추가해 주세요 -->
+          <li>
+            <span class="prog_num">05</span>
+            <div class="prog_info">
+              <p>진행시간</p>
+              <p>선택안함</p>
+            </div>
+            <p class="prog_ico">
+              <img src="/images/img_test_game.png" alt="AI 게임">
+            </p>
+            <p class="prog_tit">AI 게임</p>
+            <p class="prog_desc">AI 게임을 통해 문제해결·추론·멀티태스킹·판단·인지지각·계획 등의 역량을 평가합니다.</p>
+            <div class="prog_btn">
+              <button class="btn_select_game">
+                <span class="select_ok">게임선택</span>
+              </button>
+            </div>
+          </li>
+          <li>
+            <span class="prog_num">06</span>
+            <div class="prog_info">
+              <p>진행시간</p>
+              <p>약 4분</p>
+            </div>
+            <p class="prog_ico">
+              <img src="/images/img_test_depth.png" alt="심층면접">
+            </p>
+            <p class="prog_tit">심층면접</p>
+            <p class="prog_desc">기본면접에 이어 심화된 질문이 주어지며, 질문당 60 초의 답변시간이 주어집니다.</p>
+            <div class="prog_btn">
+              <button class="btn_set_depth btn_trans">설정</button>
+              <button class="btn_select">
+                <span class="select_ok">선택하기</span>
+                <span class="select_cancel">선택취소</span>
+              </button>
+            </div>
+          </li>
+        </ul>
+        <div class="prog_row">
+          <div class="radio_row">
+            <label class="radio_label_basic">
+              <input type="radio" class="form_radio_basic" name="selectProgress" id="">
+              <span class="checkmark"></span>
+              전체선택
+            </label>   
+            <label class="radio_label_basic">
+              <input type="radio" class="form_radio_basic" name="selectProgress" id="">
+              <span class="checkmark"></span>
+              부분선택
+            </label>                           
+          </div>
+          <div>
+            <p>
+              <span class="clr_blue">총 진행시간</span>
+              <span class="minute">30</span> 분
+            </p>
+          </div>
+          <div>
+            <a href="/evaluation/checkState.html">
+              <button class="btn_save">
+                <span>저장 후 다음</span>
+              </button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 임시버튼 : 게임선택 완료, 개인정보활용동의, 진행중 검시 modal 보기
+      개발단계에서 삭제해 주세요 -->
+    <button onclick="showModal('gameSetComplete')" class="btn_tempo3">임시버튼 게임선택 완료 modal</button>
+    <button onclick="showModal('infoAgree')" class="btn_tempo2">임시버튼 개인정보활용 동의 modal</button>
+    <button onclick="showModal('ongoingTest')" class="btn_tempo">임시버튼 진행중인 검사 modal</button>
+  </div>
+
+  <!-- 기본 면접 설정 modal -->
+  <div class="modal_wrap" id="basicIntwSet">
+    <div class="modal_cont w586 pb40">
+      <div class="modal_close"></div>
+      <div class="modal_inner">
+        <p class="modal_tit">기본 면접 설정</p>
+        <p class="modal_desc">기본설정은 3개의 질문이 주어지게 됩니다.</p>
+        <div class="mt40">
+          <div class="test_set_row">
+            <div class="test_set_tit">개별 설정</div>
+            <div>
+              <div class="check_toggle_wrap">
+                <input type="checkbox" id="checkToggleBasic" class="form_check_toggle">
+                <label for="checkToggleBasic" class="label_check_toggle"></label>
+                <span class="txt_on">ON</span>
+                <span class="txt_off">OFF</span>
+              </div>               
+            </div>
+          </div>
+          <div class="test_set_row">
+            <div class="test_set_tit">
+              질문 개수
+              <p class="clr_blue">최대 3개까지 설정 가능</p>
+            </div>
+            <div>
+              <div class="select_box">
+                <select class="form_select">
+                  <option value="">1</option>
+                  <option value="">2</option>
+                  <option value="">3</option>
+                </select>
+              </div>               
+            </div>
+          </div>
+          <div class="select_ques">
+            <p class="test_set_tit">질문 설정</p>
+            <div class="select_ques_box">
+              <div class="select_ques_toggle">질문을 선택해 주세요.</div>
+              <!-- 질문을 선택해 주세요. 영역을 선택했을 경우, 보여지는 영역 -->
+              <div class="select_ques_inner">
+                <div class="form_search_box">
+                  <input type="text" class="form_search">
+                </div>
+                <ul class="select_ques_list">
+                  <li>(지원동기) 프로그래밍 시 가장 중요한 요인은 무엇입니까?</li>
+                  <li>(지원동기) 프로그래밍 시 가장 중요한 요인은 무엇입니까?</li>
+                  <li>(지원동기) 프로그래밍 시 가장 중요한 요인은 무엇입니까?(지원동기) 프로그래밍 시 가장 중요한 요인은 무엇입니까?(지원동기) 프로그래밍 시 가장 중요한 요인은 무엇입니까?</li>
+                  <li>(지원동기) 프로그래밍 시 가장 중요한 요인은 무엇입니까?</li>
+                  <li>(지원동기) 프로그래밍 시 가장 중요한 요인은 무엇입니까?</li>
+                  <li>(지원동기) 프로그래밍 시 가장 중요한 요인은 무엇입니까?</li>
+                </ul>
+              </div>
+              <!-- //질문을 선택해 주세요. 영역을 선택했을 경우, 보여지는 영역 -->
+            </div>
+            <ul id="dragableList" class="select_result_list">
+              <li>
+                <p class="select_result_desc">(지원동기) 프로그래밍 시 가장 중요한 요인은 무엇입니까?</p>
+                <span class="ico_delete"></span>
+              </li>
+              <li>
+                <p class="select_result_desc">(지원동기) 프로그래밍 시 가장 중요한 요인은 무엇입니까? (지원동기) 프로그래밍 시 가장 중요한 요인은 무엇입니까?</p>
+                <span class="ico_delete"></span>
+              </li>
+              <li>
+                <p class="select_result_desc">(지원동기) 프로그래밍 시 가장 중요한 요인은 무엇입니까?</p>
+                <span class="ico_delete"></span>
+              </li>
+            </ul>
+            <p class="txt_info">질문을 선택하신 후 , 드래그 하여 순서를 변경하실 수 있습니다.</p>
+          </div>
+
+          <div class="btn_row_single">
+            <button class="btn_dark_blue">확인</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- //기본 면접 설정 modal -->
+
+  <!-- 심층 면접 설정 modal -->
+  <div class="modal_wrap" id="depthIntwSet">
+    <div class="modal_cont w586 pb40">
+      <div class="modal_close"></div>
+      <div class="modal_inner">
+        <p class="modal_tit">심층 면접 설정</p>
+        <p class="modal_desc">대화형은 응시자의 답변 내용을 분석하여 1가지 질문을 합니다. 기본설정은 꼬리질문 2 개를 포함하여 3 가지 질문이 주어지게 됩니다.</p>
+        <div class="mt40">
+          <div class="test_set_row">
+            <div class="test_set_tit">개별 설정</div>
+            <div>
+              <div class="check_toggle_wrap">
+                <input type="checkbox" id="checkToggleDepth" class="form_check_toggle">
+                <label for="checkToggleDepth" class="label_check_toggle"></label>
+                <span class="txt_on">ON</span>
+                <span class="txt_off">OFF</span>
+              </div>               
+            </div>
+          </div>   
+          <div class="select_ques">
+            <p class="test_set_tit">질문 설정</p>
+            <div class="select_ques_box">
+              <div class="select_ques_toggle">질문을 선택해 주세요.</div>
+              <!-- 질문을 선택해 주세요. 영역을 선택했을 경우, 보여지는 영역 -->
+              <div class="select_ques_inner">
+                <div class="form_search_box">
+                  <input type="text" class="form_search">
+                </div>
+                <ul class="select_ques_list">
+                  <li>(지원동기) 프로그래밍 시 가장 중요한 요인은 무엇입니까?</li>
+                  <li>(지원동기) 프로그래밍 시 가장 중요한 요인은 무엇입니까?</li>
+                  <li>(지원동기) 프로그래밍 시 가장 중요한 요인은 무엇입니까?(지원동기) 프로그래밍 시 가장 중요한 요인은 무엇입니까?(지원동기) 프로그래밍 시 가장 중요한 요인은 무엇입니까?</li>
+                  <li>(지원동기) 프로그래밍 시 가장 중요한 요인은 무엇입니까?</li>
+                  <li>(지원동기) 프로그래밍 시 가장 중요한 요인은 무엇입니까?</li>
+                  <li>(지원동기) 프로그래밍 시 가장 중요한 요인은 무엇입니까?</li>
+                </ul>
+              </div>
+              <!-- //질문을 선택해 주세요. 영역을 선택했을 경우, 보여지는 영역 -->
+            </div>
+            <ul id="dragableList2" class="select_result_list">
+              <li>
+                <p class="select_result_desc">(지원동기) 프로그래밍 시 가장 중요한 요인은 무엇입니까?</p>
+                <span class="ico_delete"></span>
+              </li>
+              <li>
+                <p class="select_result_desc">(지원동기) 프로그래밍 시 가장 중요한 요인은 무엇입니까? (지원동기) 프로그래밍 시 가장 중요한 요인은 무엇입니까?</p>
+                <span class="ico_delete"></span>
+              </li>
+              <li>
+                <p class="select_result_desc">(지원동기) 프로그래밍 시 가장 중요한 요인은 무엇입니까?</p>
+                <span class="ico_delete"></span>
+              </li>
+            </ul>
+            <p class="txt_info">질문을 선택하신 후 , 드래그 하여 순서를 변경하실 수 있습니다.</p>
+          </div>  
+          <div class="btn_row_single">
+            <button class="btn_dark_blue">확인</button>
+          </div>                        
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- //심층 면접 설정 modal -->
+
+  <!-- 게임 종류 설정 modal -->
+  <div class="modal_wrap" id="gameSetting">
+    <div class="modal_cont w1360 pb40">
+      <div class="modal_close"></div>
+      <div class="modal_inner">
+        <p class="modal_tit">게임 종류 설정</p>
+        <p class="modal_desc">게임은 다른 종류로 최대 6개까지 선택이 가능합니다.</p>
+        <div class="game_list_wrap">
+          <!-- 계획 게임 -->
+          <div class="game_part parent_A">
+            <div class="game_head">계획</div>
+            <ul class="game_list">
+              <li class="game_A_1">
+                <label class="game_label_check">
+                  <input type="checkbox" id="gameA_1" class="game_form_check">
+                  <span class="game_check_mark"></span>
+                  <span class="game_nm">공 옮기기</span>
+                  <span class="game_info">약 4분 · 마우스사용</span>
+                  <span class="game_ico"></span>
+                </label>                     
+              </li>
+              <li class="game_A_2">
+                <label class="game_label_check">
+                  <input type="checkbox" id="gameA_2" class="game_form_check">
+                  <span class="game_check_mark"></span>
+                  <span class="game_nm">퍼즐 맞추기</span>
+                  <span class="game_info">약 4분 · 마우스사용</span>
+                  <span class="game_ico"></span>
+                </label>                     
+              </li>
+              <li class="game_A_3">
+                <label class="game_label_check">
+                  <input type="checkbox" id="gameA_3" class="game_form_check">
+                  <span class="game_check_mark"></span>
+                  <span class="game_nm">그림비교</span>
+                  <span class="game_info">약 4분 · 키보드사용</span>
+                  <span class="game_ico"></span>
+                </label>                     
+              </li>
+            </ul>
+          </div>
+          <!-- 계획 게임 -->
+
+          <!-- 추론 게임 -->
+          <div class="game_part parent_B">
+            <div class="game_head">추론</div>
+            <ul class="game_list">
+              <li class="game_B_1">
+                <label class="game_label_check">
+                  <input type="checkbox" id="gameB_1" class="game_form_check">
+                  <span class="game_check_mark"></span>
+                  <span class="game_nm">무게 나열</span>
+                  <span class="game_info">약 4분 · 마우스사용</span>
+                  <span class="game_ico"></span>
+                </label>                     
+              </li>              
+              <li class="game_B_2">
+                <label class="game_label_check">
+                  <input type="checkbox" id="gameB_2" class="game_form_check">
+                  <span class="game_check_mark"></span>
+                  <span class="game_nm">날씨 맞히기</span>
+                  <span class="game_info">약 4분 · 마우스사용</span>
+                  <span class="game_ico"></span>
+                </label>                     
+              </li>              
+              <li class="game_B_3">
+                <label class="game_label_check">
+                  <input type="checkbox" id="gameB_3" class="game_form_check">
+                  <span class="game_check_mark"></span>
+                  <span class="game_nm">클립 맞히기</span>
+                  <span class="game_info">약 4분 · 마우스사용</span>
+                  <span class="game_ico"></span>
+                </label>                     
+              </li>              
+              <li class="game_B_4">
+                <label class="game_label_check">
+                  <input type="checkbox" id="gameB_4" class="game_form_check">
+                  <span class="game_check_mark"></span>
+                  <span class="game_nm">온도 맞히기</span>
+                  <span class="game_info">약 4분 · 마우스사용</span>
+                  <span class="game_ico"></span>
+                </label>                     
+              </li>              
+            </ul>
+          </div>
+          <!-- //추론 게임 -->
+
+          <!-- 판단 게임 -->
+          <div class="game_part parent_C">
+            <div class="game_head">판단</div>
+            <ul class="game_list">
+              <li class="game_C_1">
+                <label class="game_label_check">
+                  <input type="checkbox" id="gameC_1" class="game_form_check">
+                  <span class="game_check_mark"></span>
+                  <span class="game_nm">글자 의미-색</span>
+                  <span class="game_info">약 2분 · 키보드사용</span>
+                  <span class="game_ico"></span>
+                </label>                     
+              </li>                
+              <li class="game_C_2">
+                <label class="game_label_check">
+                  <input type="checkbox" id="gameC_2" class="game_form_check">
+                  <span class="game_check_mark"></span>
+                  <span class="game_nm">문자코드 분류</span>
+                  <span class="game_info">약 4분 · 키보드사용</span>
+                  <span class="game_ico"></span>
+                </label>                     
+              <li class="game_C_3">
+                <label class="game_label_check">
+                  <input type="checkbox" id="gameC_3" class="game_form_check">
+                  <span class="game_check_mark"></span>
+                  <span class="game_nm">도형비교</span>
+                  <span class="game_info">약 4분 · 마우스사용</span>
+                  <span class="game_ico"></span>
+                </label>                     
+              </li>                
+              <li class="game_C_4">
+                <label class="game_label_check">
+                  <input type="checkbox" id="gameC_4" class="game_form_check">
+                  <span class="game_check_mark"></span>
+                  <span class="game_nm">도형 고르기</span>
+                  <span class="game_info">약 4분 · 마우스사용</span>
+                  <span class="game_ico"></span>
+                </label>                     
+              </li>                
+            </ul>
+          </div>
+          <!-- //판단 게임 -->
+
+          <!-- 멀티테스킹 게임 -->
+          <div class="game_part parent_D">
+            <div class="game_head">멀티테스킹</div>
+            <ul class="game_list">
+              <li class="game_D_1">
+                <label class="game_label_check">
+                  <input type="checkbox" id="gameD_1" class="game_form_check">
+                  <span class="game_check_mark"></span>
+                  <span class="game_nm">버튼조작</span>
+                  <span class="game_info">약 4분 · 마우스사용</span>
+                  <span class="game_ico"></span>
+                </label>                     
+              </li>                
+              <li class="game_D_2">
+                <label class="game_label_check">
+                  <input type="checkbox" id="gameD_2" class="game_form_check">
+                  <span class="game_check_mark"></span>
+                  <span class="game_nm">신호등</span>
+                  <span class="game_info">약 4분 · 마우스사용</span>
+                  <span class="game_ico"></span>
+                </label>                     
+              </li>                
+              <li class="game_D_3">
+                <label class="game_label_check">
+                  <input type="checkbox" id="gameD_3" class="game_form_check">
+                  <span class="game_check_mark"></span>
+                  <span class="game_nm">카메라 위치 찾기</span>
+                  <span class="game_info">약 4분 · 마우스사용</span>
+                  <span class="game_ico"></span>
+                </label>                     
+              </li>                
+            </ul>
+          </div>
+          <!-- //멀티테스킹 게임 -->
+
+          <!-- 인지지각 게임 -->
+          <div class="game_part parent_E">
+            <div class="game_head">인지지각</div>
+            <ul class="game_list">
+              <li class="game_E_1">
+                <label class="game_label_check">
+                  <input type="checkbox" id="gameE_1" class="game_form_check">
+                  <span class="game_check_mark"></span>
+                  <span class="game_nm">블록 방향</span>
+                  <span class="game_info">약 4분 · 마우스사용</span>
+                  <span class="game_ico"></span>
+                </label>                     
+              </li>                 
+              <li class="game_E_2">
+                <label class="game_label_check">
+                  <input type="checkbox" id="gameE_2" class="game_form_check">
+                  <span class="game_check_mark"></span>
+                  <span class="game_nm">입 길이 판단</span>
+                  <span class="game_info">약 4분 · 키보드사용</span>
+                  <span class="game_ico"></span>
+                </label>                     
+              </li>                 
+              <li class="game_E_3">
+                <label class="game_label_check">
+                  <input type="checkbox" id="gameE_3" class="game_form_check">
+                  <span class="game_check_mark"></span>
+                  <span class="game_nm">공 막아 내기</span>
+                  <span class="game_info">약 4분 · 마우스사용</span>
+                  <span class="game_ico"></span>
+                </label>                     
+              </li>                 
+            </ul>
+          </div>
+          <!-- //인지지각 게임 -->
+
+          <!-- 문제해결 게임 -->
+          <div class="game_part parent_F">
+            <div class="game_head">문제해결</div>
+            <ul class="game_list">
+              <li class="game_F_1">
+                <label class="game_label_check">
+                  <input type="checkbox" id="gameF_1" class="game_form_check">
+                  <span class="game_check_mark"></span>
+                  <span class="game_nm">N-Back 게임</span>
+                  <span class="game_info">약 4분 · 키보드사용</span>
+                  <span class="game_ico"></span>
+                </label>                     
+              </li>  
+              <li class="game_F_2">
+                <label class="game_label_check">
+                  <input type="checkbox" id="gameF_2" class="game_form_check">
+                  <span class="game_check_mark"></span>
+                  <span class="game_nm">블록 쌓기</span>
+                  <span class="game_info">약 4분 · 마우스사용</span>
+                  <span class="game_ico"></span>
+                </label>                     
+              </li>  
+              <li class="game_F_3">
+                <label class="game_label_check">
+                  <input type="checkbox" id="gameF_3" class="game_form_check">
+                  <span class="game_check_mark"></span>
+                  <span class="game_nm">타일 위치 기억하기</span>
+                  <span class="game_info">약 4분 · 마우스사용</span>
+                  <span class="game_ico"></span>
+                </label>                     
+              </li>  
+              <li class="game_F_4">
+                <label class="game_label_check">
+                  <input type="checkbox" id="gameF_4" class="game_form_check">
+                  <span class="game_check_mark"></span>
+                  <span class="game_nm">패턴 비교하기</span>
+                  <span class="game_info">약 4분 · 마우스사용</span>
+                  <span class="game_ico"></span>
+                </label>                     
+              </li>  
+              <li class="game_F_5">
+                <label class="game_label_check">
+                  <input type="checkbox" id="gameF_5" class="game_form_check">
+                  <span class="game_check_mark"></span>
+                  <span class="game_nm">이전 카드와 비교하기</span>
+                  <span class="game_info">약 4분 · 마우스사용</span>
+                  <span class="game_ico"></span>
+                </label>                     
+              </li>  
+            </ul>
+          </div>
+          <!-- //문제해결 게임 -->
+        </div>
+        <div class="game_set_bottom">
+          <div class="btn_row_double mt20">
+            <button class="btn_dark_blue">선택 완료</button>
+            <button class="btn_dark_blue">초기화</button>
+          </div>
+          <div class="game_time">
+            <span class="time_tit clr_blue_prime">총 진행시간</span>
+            <p class="time">약 <span class="sum_num">30</span> 분</p>
+            <p><span class="sum_num">6</span> 종</p>
+          </div>
+        </div>        
+      </div>
+    </div>
+  </div>
+  <!-- //게임 종류 설정 modal -->
+
+  <!-- 게임 설정 완료 modal -->
+  <div class="modal_wrap pt300" id="gameSetComplete">
+    <div class="modal_cont w480 pb40">
+      <div class="modal_close"></div>
+      <div class="modal_inner">
+        <p class="modal_tit">선택하신 게임으로 설정하시겠습니까?</p>
+        <div class="btn_list">
+          <button class="btn_dark_blue">예</button>
+          <button class="btn_dark_blue">다시 선택하기</button>
+        </div>        
+      </div>
+    </div>
+  </div>
+  <!-- //게임 설정 완료 modal -->
+
+  <!-- 진행중인 검사 리스트 modal -->
+  <div class="modal_wrap" id="ongoingTest">
+    <div class="modal_cont w586 pb40">
+      <div class="modal_close"></div>
+      <div class="modal_inner">
+        <p class="modal_tit">진행중인 검사가 있습니다.</p>
+        <ul class="ontest_list">
+          <li>
+            <p class="ontest_date">23.05.07 10:00</p>
+            <p class="ontest_tit">[기술직] 면접연습 1차 테스트</p>
+            <p class="ontest_part">기본면접</p>
+            <p class="ontest_btn">
+              <button class="btn_continue">이어하기</button>
+            </p>
+          <li>
+            <p class="ontest_date">23.05.07 10:00</p>
+            <p class="ontest_tit">[기술직] 면접연습 1차 테스트 [기술직] 면접연습 1차 테스트[기술직] 면접연습 1차 테스트</p>
+            <p class="ontest_part">기본면접</p>
+            <p class="ontest_btn">
+              <button class="btn_continue">이어하기</button>
+            </p>
+          <li>
+            <p class="ontest_date">23.05.07 10:00</p>
+            <p class="ontest_tit">[기술직] 면접연습 1차 테스트</p>
+            <p class="ontest_part">기본면접</p>
+            <p class="ontest_btn">
+              <button class="btn_continue">이어하기</button>
+            </p>
+          <li>
+            <p class="ontest_date">23.05.07 10:00</p>
+            <p class="ontest_tit">[기술직] 면접연습 1차 테스트</p>
+            <p class="ontest_part">기본면접</p>
+            <p class="ontest_btn">
+              <button class="btn_continue">이어하기</button>
+            </p>
+          </li>
+          <li>
+            <p class="ontest_date">23.05.07 10:00</p>
+            <p class="ontest_tit">[기술직] 면접연습 1차 테스트</p>
+            <p class="ontest_part">기본면접</p>
+            <p class="ontest_btn">
+              <button class="btn_continue">이어하기</button>
+            </p>
+          </li>
+          <li>
+            <p class="ontest_date">23.05.07 10:00</p>
+            <p class="ontest_tit">[기술직] 면접연습 1차 테스트</p>
+            <p class="ontest_part">기본면접</p>
+            <p class="ontest_btn">
+              <button class="btn_continue">이어하기</button>
+            </p>
+          </li>
+        </ul>
+        <div class="btn_row_single">
+          <button class="btn_dark_blue">새로 시작하기</button>
+        </div>        
+      </div>
+    </div>
+  </div>
+  <!-- //진행중인 검사 리스트 modal -->
+
+  <!-- 개인정보활용 동의 -->
+  <div class="modal_wrap" id="infoAgree">
+    <div class="modal_cont_s">
+      <div class="modal_close"></div>
+      <p class="modal_tit">개인정보활용 동의</p>
+      <div class="persn_info_box">
+        <p>AI역량평가를 활용하기 위해서는 몇 가지 항목에 대한 정보 제공에 동의 하여야 합니다. 이에 동의할 경우에만 평가에 응시할 수 있습니다.<br><br> 활용되는 것은 평가 점수, 영상 녹화, 음성 녹음 정보이며, 이러한 정보는 면접 평가를 위한 목적 이외에는 사용되지 않으며 일정 시간이 지나면 자동으로 삭제됩니다.<br><br> 본 내용을 숙지하였으며 내용에 동의하면 아래 체크 버튼을 체크 하신 후 시작하기 버튼을 눌러주시기 바랍니다.<br><br> 동의하시지 않을 경우에는 브라우저를 닫으시면 됩니다.</p>
+      </div>
+      <div class="agree_input_row">
+        <label class="label_check02">
+          <input type="checkbox" class="form_check02">
+          <span class="check_mark02"></span>
+          위의 내용에 동의합니다.
+        </label>             
+      </div>
+      <div class="btn_row_single mt40">
+        <button class="btn_blue">시작하기</button>
+      </div>        
+    </div>
+  </div>
+  <!-- //개인정보활용 동의 -->  
+
+  <script>
+
+    //header include
+    $("#header").load("/include/header.html");   
+
+    //gnb init
+    let showGnb = false;
+    let onStep;    
+
+    //modal
+    $('.btn_set_basic').click(function() {
+      $('#basicIntwSet').css('display', 'block')
+    })
+    $('.btn_set_depth').click(function() {
+      $('#depthIntwSet').css('display', 'block')
+    })
+    $('.btn_select_game').click(function() {
+      $('#gameSetting').css('display', 'block')
+    })
+
+    $('.modal_close').click(function() {
+      $('.modal_wrap').css('display', 'none')
+    })
+
+    //임시버튼으로 modal 보기
+    //개발단계에서 삭제해 주세요
+    function showModal(modalID) {
+      $('#' + modalID).css('display', 'block')
+    }
+
+    //진행단계 선택하기 버튼 클릭
+    $('.btn_select').click(function() {
+      $(this).toggleClass('selected');
+      $(this).parents('li').toggleClass('selected_li');
+    })
+
+    //기본 면접 설정 modal - 질문 설정 toggle 기능
+    $('.select_ques_toggle').click(function() {
+      $(this).toggleClass('selected');
+      $('.select_ques_box').toggleClass('selcted_box');
+    })
+
+    //list dragable
+    const sortableList = document.getElementById('dragableList');
+    const sortable = new Sortable(sortableList, {
+        animation: 150,
+        ghostClass: 'sortable-ghost',
+        chosenClass: 'sortable-chosen',
+        dragClass: 'sortable-drag',
+    });    
+
+    const sortableList2 = document.getElementById('dragableList2');
+    const sortable2 = new Sortable(sortableList2, {
+        animation: 150,
+        ghostClass: 'sortable-ghost',
+        chosenClass: 'sortable-chosen',
+        dragClass: 'sortable-drag',
+    });       
+
+    //게임 설정 checkbox click 이벤트
+    $('.game_form_check').on('change', function() {
+      if($(this).is(":checked")) {
+        let checkId = $(this).attr('id');
+        let icoEle = $(this).siblings('.game_ico');
+        icoEle.css({
+          backgroundImage: 'url(/images/' +  checkId + '_check.png)'
+        })
+      } else {
+        let checkId = $(this).attr('id');
+        let icoEle = $(this).siblings('.game_ico');
+        icoEle.css({
+          backgroundImage: 'url(/images/' +  checkId + '.png)'
+        })
+      }
+
+      let parentA = $('.parent_A');
+      let parentB = $('.parent_B');
+      let parentC = $('.parent_C');
+      let parentD = $('.parent_D');
+      let parentE = $('.parent_E');
+      let parentF = $('.parent_F');
+
+      let checkedListA = parentA.find('.game_form_check:checked');
+      let checkedListB = parentB.find('.game_form_check:checked');
+      let checkedListC = parentC.find('.game_form_check:checked');      
+      let checkedListD = parentD.find('.game_form_check:checked');      
+      let checkedListE = parentE.find('.game_form_check:checked');      
+      let checkedListF = parentF.find('.game_form_check:checked');      
+
+      if(checkedListA.length >= 1) {
+        $(parentA).find('.game_head').addClass('list_check');
+      } else {
+        $(parentA).find('.game_head').removeClass('list_check');
+      }
+
+      if(checkedListB.length >= 1) {
+        $(parentB).find('.game_head').addClass('list_check');
+      } else {
+        $(parentB).find('.game_head').removeClass('list_check');
+      }
+
+      if(checkedListC.length >= 1) {
+        $(parentC).find('.game_head').addClass('list_check');
+      } else {
+        $(parentC).find('.game_head').removeClass('list_check');
+      }
+
+      if(checkedListD.length >= 1) {
+        $(parentD).find('.game_head').addClass('list_check');
+      } else {
+        $(parentD).find('.game_head').removeClass('list_check');
+      }
+
+      if(checkedListE.length >= 1) {
+        $(parentE).find('.game_head').addClass('list_check');
+      } else {
+        $(parentE).find('.game_head').removeClass('list_check');
+      }
+
+      if(checkedListF.length >= 1) {
+        $(parentF).find('.game_head').addClass('list_check');
+      } else {
+        $(parentF).find('.game_head').removeClass('list_check');
+      }
+
+    })
+
+  </script>
+</body>
+</html>

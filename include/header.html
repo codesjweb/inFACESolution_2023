@@ -1,0 +1,55 @@
+<header class="header">
+  <h1 class="logo">inFACE</h1>
+  <div class="hd_inner">
+    <nav>
+      <ul class="gnb">
+        <li>
+          <span>1</span>_환경 점검
+        </li>
+        <li>
+          <span>2</span>_사용자 등록
+        </li>
+        <li>
+          <span>3</span>_기본 면접
+        </li>
+        <li>
+          <span>4</span>_성향 분석
+        </li>
+        <li>
+          <span>5</span>_공감 능력
+        </li>
+        <li>
+          <span>6</span>_AI 게임
+        </li>
+        <li>
+          <span>7</span>_심층 면접
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="cs">
+    <button class="btn_cs">
+      <span>고객지원</span> 1:1 문의
+    </button>
+  </div>
+</header>
+
+<script>
+
+  //gnb show, hide
+  if(showGnb == false) {
+    $('.header').removeClass('black');
+    $('.gnb').css('display', 'none');
+  } else if(showGnb == true) {
+    $('.header').addClass('black');
+    $('.gnb').css('display', 'flex');
+  }
+
+  //gnb init
+  let naveEle = $('.gnb li');
+  if(onStep !== undefined) {
+    naveEle.eq(onStep).addClass('on');
+  }
+
+</script>
+

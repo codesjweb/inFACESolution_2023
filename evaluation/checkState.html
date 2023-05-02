@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">  
+  <title>inFACE - AI 면접솔루션</title>
+  <meta name="author" content="EDUCE(에듀스)">
+  <meta name="keywords" content="EDUCE, inFACE, AI 채용 대비 시뮬레이터, AI 자소서/면접 플랫폼">
+	<meta name="description" content="inFACE는 인공지능 기반으로 면접과 성향분석, 다면역량평가가 
+  가능한 플랫폼입니다.">
+  <meta name="twitter:title" content="inFACE - AI 면접솔루션">
+  <meta name="twitter:description" content="inFACE는 인공지능 기반으로 면접과 성향분석, 다면역량평가가 가능한 플랫폼입니다.">
+  <!-- 이미지 주소 수정해 주세요 -->
+  <meta name="twitter:image" content="http://code-heim.com/images/sns_present.png">
+  <meta property="og:title" content="inFACE - AI 면접솔루션">
+  <meta property="og:description" content="inFACE는 인공지능 기반으로 면접과 성향분석, 다면역량평가가 가능한 플랫폼입니다.">
+  <meta property="og:url" content="https://inface.ai/educe/evaluation">
+  <meta property="og:type" content="website">
+  <!-- 이미지 주소 수정해 주세요 -->
+  <meta property="og:image" content="http://code-heim.com/images/sns_present.png">
+  <link rel="shortcut icon" href="/images/favicon.ico">
+  <link rel="stylesheet" href="/css/common.css">
+  <script src="/js/jquery-3.4.1.min.js"></script>
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  <script src="../js/face-api.js"></script>
+  <script src="/js/wavesurfer.js"></script>
+  <script src="/js/wavesurfer.microphone.min.js"></script>
+</head>
+<body class="sol_body">
+  <!-- header include -->
+  <div id="header"></div>
+  
+  <div class="wrapper">
+    <div class="inner">
+
+      <!-- 네트워크 점검 -->
+      <div class="cont_element">
+        <div class="ani_fadeinup ani_step01">
+          <h2 class="page_tit">네트워크 점검</h2>
+        </div>
+        <div class="desc_box_white clr_black ani_fadeinup ani_step02">
+          <p class="fnt_small">inFACE는 CHROME 브라우저에 최적화 되어 있습니다.<br>그러므로 다른 브라우저로 접속한 경우 크롬으로 재접속 해주시기 바랍니다.</p>
+          <p class="browser_info fnt_large">응시자님의 브라우저 종류는 <span class="clr_blue">크롬</span>입니다.</p>
+          <div class="browser_img">
+            <!-- images 폴더에 크롬, 엣지, 사파리, 웨일 이미지가 있습니다. -->
+            <img src="/images/img_chrome.png" alt="크롬">
+          </div>
+        </div>
+        <div class="desc_box_white mt20 ani_fadeinup ani_step03">
+          <p class="fnt_small">inFACE는 고용량 영상 파일을 업로드해야 하므로 안정적인 네트워크가 필요합니다.<br> 또한, 영상 업로드에 장애를 줄 수 있으므로 반드시 <span class="clr_pink">백신도 종료</span>해 주세요.</p>   
+          <div class="network_info">
+            <div class="tethering">테더링 금지</div>
+            <div class="ico_arrow">
+              <img src="/images/ico_arrow_right.png" alt="">
+            </div>
+            <div class="ethernet">이더넷·Wi-Fi권장</div>
+          </div>       
+        </div>
+        <div class="btn_row_double ani_fadeinup ani_step04">
+          <a href="/evaluation/progreeSetup.html">
+            <button class="btn_prev">
+              <span>이전</span>
+            </button>
+          </a>
+          <button onclick="showPage(1,0)" class="btn_next">
+            <span>다음</span>
+          </button>
+        </div>
+      </div>
+      <!-- //네트워크 점검 -->
+
+      <!-- 장치 점검 -->
+      <div class="cont_element device_check_sec">
+        <button onclick="showSettingModal()" class="btn_set_fixed">
+          <span>환경설정</span>
+        </button>
+        <div class="ani_fadeinup ani_step01">
+          <h2 class="page_tit">장치 점검</h2>
+          <p class="page_desc">AI역량평가는 아래와 같은 단계로 구성되어 있습니다. 응시자는 반드시 모든 단계의 과정을 다 마쳐야 합니다.<br> 그렇지 않을 경우, 불이익이 발생할 수 있습니다.</p>
+        </div>
+        <div class="ani_fadeinup ani_step02">
+          <p class="chk_desc">각 기기별 버튼을 누르시고 <span class="clr_blue">설정 상태를 확인</span>해 주세요.</p>
+          <ul class="chk_list">
+            <li onclick="showKeyModal()" class="chk_list_key">
+              <p class="chk_tit">키보드</p>
+              <div class="chk_dev_img">
+                <img src="../images/img_keypad.png" alt="키보드">
+              </div>
+              <p class="chk_desc02">방향 키를 비롯한 다른 키가 이상 없이<br> 작동하는지 확인해 주세요.</p>
+              <div class="chk_device_input">
+                <label class="label_check">
+                  <input type="checkbox" id="formCheckKey" class="form_check" disabled>
+                  <span class="check_mark"></span>
+                </label>              
+              </div>
+            </li>
+            <li onclick="showMouseModal()" class="chk_list_mouse">
+              <p class="chk_tit">마우스</p>
+              <div class="chk_dev_img">
+                <img src="../images/img_mouse.png" alt="마우스">
+              </div>
+              <p class="chk_desc02">노트북 터치패드 사용은 지양해 주시고,<br> 마우스 감도를 적절히 조정해주세요.</p>
+              <div class="chk_device_input">
+                <label class="label_check">
+                  <input type="checkbox" id="formCheckMouse" class="form_check">
+                  <span class="check_mark"></span>
+                </label>              
+              </div>
+            </li>
+            <li onclick="showWebcamModal()" class="chk_list_webcam">
+              <p class="chk_tit">웹캠</p>
+              <div class="chk_dev_img">
+                <img src="../images/img_cam.png" alt="웹캠">
+              </div>
+              <p class="chk_desc02">웹캠이 정상적으로 설치, 연결되었는지<br> 확인해 주세요.</p>
+              <div class="chk_device_input">
+                <label class="label_check">
+                  <input type="checkbox" id="formCheckWebcam" class="form_check">
+                  <span class="check_mark"></span>
+                </label>              
+              </div>
+            </li>
+            <li onclick="showMikeModal()" class="chk_list_mike">
+              <p class="chk_tit">마이크</p>
+              <div class="chk_dev_img">
+                <img src="../images/img_mike.png" alt="마이크">
+              </div>
+              <p class="chk_desc02">마이크 상태를 사전에 확인해 주세요.<br> 아이폰 마이크 사용가능.</p>
+              <div class="chk_device_input">
+                <label class="label_check">
+                  <input type="checkbox" id="formCheckMike" class="form_check">
+                  <span class="check_mark"></span>
+                </label>              
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="btn_row_triple ani_fadeinup ani_step03">
+          <button onclick="showPage(0,1)"" class="btn_prev">
+            <span>이전</span>
+          </button>
+          <button class="btn_blue">점검없이 바로 시작</button>
+          <button onclick="showPage(2,1)" class="btn_next">
+            <span>다음</span>
+          </button>
+        </div>     
+        <p class="desc_caution ani_fadeinup ani_step04">새창 허용을 통해 웹캠과 마이크 권한을 승인해야 합니다.</p>     
+      </div>
+      <!-- //장치 점검 -->
+
+      <!-- 유의사항 1 -->
+      <div class="cont_element">
+        <h2 class="page_tit ani_fadeinup ani_step01">다음 사항에 유의하세요!</h2>
+        <ul class="caution_li">
+          <li class="ani_fadeinup ani_step02">
+            <p class="caution_num">01</p>
+            <p class="caution_tit">브라우저 창 버튼 사용 불가</p>
+            <p class="caution_desc">AI역량평가 응시 중에 브라우저의 뒤로가기 버튼을 누르거나 브라우저 창을 닫으시면 안됩니다.</p>
+            <div class="caution_img">
+              <img src="../images/img_cau1.png" alt="뒤로가기 버튼 금지, 닫기 버튼 금지">
+            </div>
+          </li>
+          <li class="ani_fadeinup ani_step03">
+            <p class="caution_num">02</p>
+            <p class="caution_tit">컴퓨터 또는 네트워크 상태에 따른 재응시</p>
+            <p class="caution_desc">AI역량평가 응시 중에 사용자의 컴퓨터 혹은 네트워크 상태 등에 따라 화면이 일시 정지하거나 꺼질 수 있습니다. 이 경우, 컴퓨터를 재시작 한 뒤에 재응시 해주세요. 종료된 단계에서부터 시작됩니다.</p>
+            <div class="caution_img">
+              <img src="../images/img_cau2.png" alt="">
+            </div>
+          </li>
+          <li class="ani_fadeinup ani_step04">
+            <p class="caution_num">03</p>
+            <p class="caution_tit">그래픽 가속 기능 확인</p>
+            <p class="caution_desc">AI게임이 현저히 느릴 경우 그래픽 가속 기능을 확인해 주시기 바랍니다.</p>
+            <div class="caution_img">
+              <img src="../images/img_cau3.png" alt="가속 사용 버튼 활성화">
+            </div>
+          </li>
+        </ul>
+        <div class="btn_row_double ani_fadeinup ani_step05">
+          <button onclick="showPage(1,2)" class="btn_trans btn_prev">
+            <span>이전</span>
+          </button>
+          <button onclick="showPage(3,2)" class="btn_trans btn_next">
+            <span>다음</span>
+          </button>
+        </div>        
+      </div>
+      <!-- //유의사항 1 -->
+
+      <!-- 유의사항 2 -->
+      <div class="cont_element">
+        <h2 class="page_tit ani_fadeinup ani_step01">다음 사항에 유의하세요!</h2>
+        <div class="caution_box ani_fadeinup ani_step02">
+          <p class="caution_num">04</p>
+          <p class="caution_tit">얼굴과 음성 인식을 위한 바른 자세 유지</p>
+          <p class="caution_desc">면접 진행시 사용자의 얼굴과 음성을 인식하기 위해서 다음과 같은 상황에 대해서 유의해야 합니다.</p>
+
+          <div class="caution_pst">
+            <div>
+              <div class="pst_info">
+                <img src="../images/img_cau4_1.png" alt="">
+                <p>머리를 좌우, 상하로 흔들지 말고</p>
+              </div>
+              <div class="pst_info">
+                <img src="../images/img_cau4_2.png" alt="">
+                <p>얼굴 전체가 화면에 잡히게 해 주세요.</p>
+              </div>
+            </div>
+            <div>
+              <div class="pst_info">
+                <img src="../images/img_cau4_3.png" alt="">
+                <p>주변 소음이 심하면 음성 인식이 안돼요!</p>
+              </div>
+              <div class="pst_info">
+                <img src="../images/img_cau4_4.png" alt="">
+                <p>목소리는 너무 작지 않게 해 주세요.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="btn_row_double ani_fadeinup ani_step03">
+          <button onclick="showPage(2,3)" class="btn_trans btn_prev">
+            <span>이전</span>
+          </button>
+          <a href="/evaluation/userRegister.html">
+            <button class="btn_blue">시작하기</button>
+          </a>
+        </div>
+      </div>
+      <!-- //유의사항 2 -->
+    </div>
+  </div>
+
+  <!-- keyboard check modal -->
+  <div class="modal_wrap" id="checkKeyModal">
+    <div class="modal_cont">
+      <div class="modal_close"></div>
+      <div class="modal_inner">
+        <p class="modal_tit">키보드</p>
+        <p class="modal_desc">키보드 왼쪽 방향키(←)와 오른쪽 방향키(→)를 누르세요.<br> 이상이 없으면 ‘좋아요’가 활성화됩니다.</p>
+        <div class="modal_inner_box keyboard_box">
+          <span class="key_up">
+            <img src="../images/key_up.png" alt="키보드 up">
+          </span>
+          <span class="key_left">
+            <img src="../images/key_left.png" alt="키보드 left">
+          </span>
+          <span class="key_down">
+            <img src="../images/key_down.png" alt="키보드 down">
+          </span>
+          <span class="key_right">
+            <img src="../images/key_right.png" alt="키보드 right">
+          </span>
+        </div>
+        <div class="check_btn_row">
+          <p class="check_good key_check_good">
+            <span>좋아요!</span>
+          </p>
+          <button onclick="showSettingModal()" class="btn_set">
+            <span>환경설정</span>
+          </button>
+        </div>
+      </div>
+      <div class="modal_btn_row">
+        <button class="btn_confirm">확인</button>
+      </div>
+    </div>
+  </div>
+  <!-- //keyboard check modal -->
+
+  <!-- mouse check modal -->
+  <div class="modal_wrap" id="checkMouseModal">
+    <div class="modal_cont">
+      <div class="modal_close"></div>
+      <div class="modal_inner">
+        <p class="modal_tit">마우스</p>
+        <p class="modal_desc">아래 마우스 이미지를 클릭해 주세요.<br> 이상이 없으면 ‘좋아요’가 활성화됩니다.</p>
+        <div class="modal_inner_box mouse_box">
+          <div class="mouse_img"></div>
+        </div>
+        <div class="check_btn_row">
+          <p class="check_good mouse_check_good">
+            <span>좋아요!</span>
+          </p>
+          <button onclick="showSettingModal()" class="btn_set">
+            <span>환경설정</span>
+          </button>
+        </div>
+      </div>
+      <div class="modal_btn_row">
+        <button class="btn_confirm">확인</button>
+      </div>
+    </div>
+  </div>
+  <!-- //mouse check modal -->
+
+  <!-- webcam check modal -->
+  <div class="modal_wrap" id="checkWebcamModal">
+    <div class="modal_cont">
+      <div class="modal_close"></div>
+      <div class="modal_inner">
+        <p class="modal_tit">웹캠</p>
+        <p class="modal_desc">웹캠으로 자신의 얼굴 전체가 나오도록 하세요.<br> 이상이 없으면 ‘좋아요’가 활성화됩니다.</p>
+        <div class="modal_inner_box webcam_box">
+          <video id="webcamArea" width="300" height="224" autoplay></video>
+          <canvas id="myCanvas" style="position: absolute; top: 0; left: 0;"></canvas>          
+        </div>
+        <div class="check_btn_row">
+          <p class="check_good webcam_check_good">
+            <span>좋아요!</span>
+          </p>
+          <button onclick="showSettingModal()" class="btn_set">
+            <span>환경설정</span>
+          </button>
+        </div>
+      </div>
+      <div class="modal_btn_row">
+        <button class="btn_confirm">확인</button>
+      </div>
+    </div>
+  </div>
+  <!-- //webcam check modal -->
+
+  <!-- mike check modal -->
+  <div class="modal_wrap" id="checkMikeModal">
+    <div class="modal_cont">
+      <div class="modal_close"></div>
+      <div class="modal_inner">
+        <p class="modal_tit">헤드셋</p>
+        <p class="modal_desc">마이크 버튼을 누르고 말을 해보세요.<br> 이상이 없으면 ‘좋아요’가 활성화됩니다.</p>
+        <div>
+          <button class="btn_mike_test">
+            <span>마이크 테스트</span>
+          </button>
+        </div>
+        <div class="mike_box">
+          <div id="waveform"></div>
+        </div>
+        <div class="check_btn_row">
+          <p class="check_good mike_check_good">
+            <span>좋아요!</span>
+          </p>
+          <button onclick="showSettingModal()" class="btn_set">
+            <span>환경설정</span>
+          </button>
+        </div>
+      </div>
+      <div class="modal_btn_row">
+        <button class="btn_confirm">확인</button>
+      </div>
+    </div>
+  </div>
+  <!-- //mike check modal -->
+
+  <!-- 장치문제 해결가이드 modal -->
+  <div class="modal_wrap" id="settingModal">
+    <div class="modal_cont w780">
+      <div class="modal_close"></div>
+      <div class="modal_inner">
+        <p class="modal_tit">장치문제 해결 가이드</p>
+        <ul class="tab_menu">
+          <li class="selected">키보드</li>
+          <li>마우스</li>
+          <li>캠카메라</li>
+          <li>마이크</li>
+        </ul>
+        <div class="tab_cont">
+          <div class="tab_cont1">
+            <p class="fnt_large">키보드가 제대로 작동하지 않을 때 조치 방법</p>
+            <div class="guide_img">
+              <img src="../images/trouble_guide_key board.jpg" alt="키보드가 제대로 작동하지 않을 때 조치 방법">
+            </div>
+            <ul class="guide_desc">
+              <li>
+                <span class="num">1</span>
+                장치관리자
+              </li>
+              <li>
+                <span class="num">2</span>
+                키보드가 제대로 인식되어 있는지 확인.
+              </li>
+              <li>
+                <span class="num">3</span>
+                블루투스 키보드일 경우 <b>블루투스 설정 확인.</b>
+              </li>
+            </ul>
+          </div>
+          <div class="tab_cont2">
+            <p class="fnt_large">마우스가 제대로 작동하지 않을 때 조치 방법</p>
+            <div class="guide_img">
+              <img src="../images/trouble_guide_mouse.jpg" alt="마우스가 제대로 작동하지 않을 때 조치 방법">
+            </div>
+            <ul class="guide_desc">
+              <li>
+                <span class="num">1</span>
+                장치관리자
+              </li>
+              <li>
+                <span class="num">2</span>
+                마우스가 제대로 인식되어 있는지 확인.
+              </li>
+              <li>
+                <span class="num">3</span>
+                블루투스 마우스일 경우 <b>블루투스 설정 확인.</b>
+              </li>
+            </ul>            
+          </div>
+          <div class="tab_cont3">
+            <p class="fnt_large">캠카메라가 제대로 작동하지 않을 때 조치 방법</p>
+            <div class="guide_img">
+              <img src="../images/trouble_guide_cam.jpg" alt="캠카메라가 제대로 작동하지 않을 때 조치 방법">
+            </div>
+            <ul class="guide_desc">
+              <li>
+                <span class="num">1</span>
+                장치관리자
+              </li>
+              <li>
+                <span class="num">2</span>
+                이미징 장치가 제대로 인식되어 있는지 확인.
+              </li>
+            </ul>              
+          </div>
+          <div class="tab_cont4">
+            <p class="fnt_large">녹음기가 제대로 작동하지 않을 때 조치 방법</p>
+            <div class="guide_img">
+              <img src="../images/trouble_guide_mike.jpg" alt="녹음기가 제대로 작동하지 않을 때 조치 방법">
+            </div>  
+            <ul class="guide_desc">
+              <li>
+                <span class="num">1</span>
+                제어판
+              </li>
+              <li>
+                <span class="num">2</span>
+                소리 → 녹음
+              </li>
+              <li>
+                <span class="num">3</span>
+                마이크 설정 확인
+              </li>
+            </ul>                        
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- //장치문제 해결가이드 modal -->
+
+  <script>
+
+    //header include
+    $("#header").load("/include/header.html");   
+
+    //gnb init
+    let showGnb = true;
+    let onStep = 0;
+
+    //순차적으로 컨텐츠 보여주기
+    let showHideEl = $('.cont_element');
+
+    function showPage(showIndex, hideIndex) {
+      showHideEl.eq(hideIndex).css('display', 'none');
+      showHideEl.eq(showIndex).css('display', 'block');
+    }
+
+    function showPageInit() {
+      showHideEl.eq(0).css('display', 'block');
+    }
+    showPageInit();       
+    
+    //장치점검 modal 
+    function showKeyModal() {
+      $('#checkKeyModal').css('display', 'block')
+    }
+    function showMouseModal() {
+      $('#checkMouseModal').css('display', 'block')
+    }
+    function showWebcamModal() {
+      $('#checkWebcamModal').css('display', 'block');
+      start_face_detect();
+    }
+    function showMikeModal() {
+      $('#checkMikeModal').css('display', 'block');
+    }
+
+    function showSettingModal() {
+      $('#settingModal').css('display', 'block')
+    }
+    $('.modal_close, .btn_confirm').click(function() {
+      $(this).parents('.modal_wrap').css('display', 'none');
+    })
+    
+    //device check - keyboard
+    let key_left_checked = false;
+    let key_right_checked = false;
+    let checkKeyboard = 0;
+    
+    $(document).keydown(function(e) {
+      if(e.keyCode == 37) {
+        $('.key_left img').attr('src', '/images/key_left_check.png');
+        key_left_checked = true;
+        check_left_right_key();
+      }
+      if(e.keyCode == 39) {
+        $('.key_right img').attr('src', '/images/key_right_check.png');
+        key_right_checked = true;
+        check_left_right_key();
+        $('.chk_list_key').addClass('checked_list');
+      }
+    })    
+
+    function check_left_right_key(){
+		if( key_left_checked === true && key_right_checked === true ) {
+			$('.key_check_good').addClass('check_ok');
+      $('#formCheckKey').prop('checked', true);
+		}
+		else 
+			console.log('check_left_right_key Fail')
+	  }      
+
+    //device check - mouse
+    $('.mouse_img').click(function() {
+      $('.mouse_check_good').addClass('check_ok');
+      $(this).css('background', 'url(../images/img_mouse2_checked.png) no-repeat left top/100%');
+      $('#formCheckMouse').prop('checked', true);
+      $('.chk_list_mouse').addClass('checked_list');
+    })    
+
+    //device check - webcam
+    //webcam 인지해서 보여주기
+    function checkWebcamSupport() {
+      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        startWebcam();
+      } else {
+        alert('Your browser does not support getUserMedia.');
+      }
+    }
+    function startWebcam() {
+      const video = document.getElementById('webcamArea');
+      navigator.mediaDevices.getUserMedia({ video: true })
+        .then((stream) => {
+          video.srcObject = stream;
+        })
+        .catch((error) => {
+          console.error('Error accessing webcam:', error);
+        });
+    }    
+    checkWebcamSupport();
+    
+    //face api js 얼굴인식하기
+    async function start_face_detect() {
+      await faceapi.nets.ssdMobilenetv1.loadFromUri('../models')
+      
+      const input = document.getElementById('webcamArea')
+      let detections = []
+      let detect_score = 0.0
+
+      detections = await faceapi.detectAllFaces(input)
+      console.log('detections:', detections)
+
+      if( detections.length > 0) {
+
+        const displaySize = { width: input.width, height: input.height }
+        const canvas = document.getElementById('myCanvas')
+        faceapi.matchDimensions(canvas, displaySize)
+        const resizedDetections = faceapi.resizeResults(detections, displaySize)
+        faceapi.draw.drawDetections(canvas, resizedDetections)
+
+        console.log('face detect success !')
+
+        //성공하고 나서 
+        $('.webcam_check_good').addClass('check_ok');
+        $('#formCheckWebcam').prop('checked', true);
+        $('.chk_list_webcam').addClass('checked_list');
+
+      } else {
+        console.log('fail')
+      }
+	  }        
+
+    //device check - mike : wave surfer 
+    function createWavsurfer() {
+      const wavesurfer = WaveSurfer.create({
+        container: '#waveform',
+        waveColor: '#628CF4',
+        barWidth: 2,
+        barHeight: 2, 
+        barGap: 2,
+        height: 140,
+        plugins: [
+          WaveSurfer.microphone.create()
+        ]
+      });
+
+      wavesurfer.microphone.on('deviceReady', function() {
+        console.log('Microphone device is ready');
+        $('.mike_check_good').addClass('check_ok');
+        $('#formCheckMike').prop('checked', true);
+        $('.chk_list_mike').addClass('checked_list');
+      });   
+      wavesurfer.microphone.start();
+    }
+
+    $('.btn_mike_test').click(function() {
+      createWavsurfer();
+    })    
+
+    //장치문제 해결가이드 tab menu
+    $('.tab_menu li').click(function() {
+      let activeTab = $(this).index();
+      $('.tab_menu li').removeClass('selected');
+      $(this).addClass('selected');
+
+      $('.tab_cont>div').css({display: 'none'});
+      $('.tab_cont .tab_cont' + (activeTab+1)).css({display: 'block'});          
+    })     
+
+  </script>
+
+</body>
+</html>

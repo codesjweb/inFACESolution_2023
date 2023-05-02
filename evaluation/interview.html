@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">  
+  <title>기본면접 | inFACE - AI 면접솔루션</title>
+  <meta name="author" content="EDUCE(에듀스)">
+  <meta name="keywords" content="EDUCE, inFACE, AI 채용 대비 시뮬레이터, AI 자소서/면접 플랫폼">
+	<meta name="description" content="inFACE는 인공지능 기반으로 면접과 성향분석, 다면역량평가가 
+  가능한 플랫폼입니다.">
+  <meta name="twitter:title" content="inFACE - AI 면접솔루션">
+  <meta name="twitter:description" content="inFACE는 인공지능 기반으로 면접과 성향분석, 다면역량평가가 가능한 플랫폼입니다.">
+  <!-- 이미지 주소 수정해 주세요 -->
+  <meta name="twitter:image" content="http://code-heim.com/images/sns_present.png">
+  <meta property="og:title" content="inFACE - AI 면접솔루션">
+  <meta property="og:description" content="inFACE는 인공지능 기반으로 면접과 성향분석, 다면역량평가가 가능한 플랫폼입니다.">
+  <meta property="og:url" content="https://inface.ai/educe/evaluation">
+  <meta property="og:type" content="website">
+  <!-- 이미지 주소 수정해 주세요 -->
+  <meta property="og:image" content="http://code-heim.com/images/sns_present.png">
+  <link rel="shortcut icon" href="/images/favicon.ico">
+  <link rel="stylesheet" href="/css/common.css">
+  <script src="/js/jquery-3.4.1.min.js"></script>
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  <script src="/js/wavesurfer.js"></script>
+  <script src="/js/wavesurfer.microphone.min.js"></script>
+  <script src="/js/easytimer.min.js"></script>
+</head>
+<body class="sol_body">
+  <!-- header include -->
+  <div id="header"></div>
+
+  <div id="app">
+    <div class="wrapper">
+      <div class="inner">
+
+        <!-- 기본 면접 -->
+        <div class="cont_element">
+          <div class="ani_fadeinup ani_step01">
+            <h2 class="page_tit tit_start_intvw">기본 면접이 곧 시작됩니다.</h2>
+          </div>
+          <div class="desc_box_white desc_box_start ani_fadeinup ani_step02">
+            <ul class="desc_li">
+              <li>기본 면접에서는 총 3가지 질문이 주어집니다.</li>
+              <li>이때, 각 질문마다 30초의 생각이 주어지고 30초 후에는 답변 시간이 주어집니다.</li>
+              <li>답변 시간은 90초이며 그 전이라도 답변이 완료되면 NEXT 버튼을 누르면 됩니다.</li>
+            </ul>
+            <p class="desc_answ">답변 시간 20초 이내에서 1회에 한하여 다시 답변할 수 있습니다.</p>
+          </div>
+          <div class="ani_fadeinup ani_step03">
+            <p class="fnt_large mt40">AI 면접관의 성별을 고른 뒤, <span class="clr_blue">확인 버튼</span>을 누르세요.</p>
+            <div class="interviewer">
+              <div class="male_box">
+                <input type="radio" id="intvwerMale" name="selectIntvwer">
+                <label for="intvwerMale">
+                  <span>MALE INTERVIEWER</span><br>
+                  <span class="intvwer_kr">남성 면접관</span>
+                </label>
+              </div>
+              <div class="female_box">
+                <input type="radio" id="intvwerFemale" name="selectIntvwer">
+                <label for="intvwerFemale">
+                  <span>FEMALE INTERVIEWER</span><br>
+                  <span class="intvwer_kr">여성 면접관</span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="btn_row_single ani_fadeinup ani_step04">
+            <button onclick="showPage(1,0); createWavsurfer('waveform', 140)" class="btn_blue btn_blue_large">확인</button>
+          </div>
+        </div>
+        <!-- //기본 면접 -->
+
+        <!-- 질문 답변 형식1 -->
+        <div class="cont_element">
+          <div class="ani_fadeinup ani_step01">
+            <p class="tit_bd">질문 01.</p>
+            <p class="ques_desc">해당 직무 분야에 지원하게 된 이유와<br> 선택 직무에 본인이 적합하다고 판단하고 있는 근거에 대해 말해주세요.</p>
+          </div>  
+          <div class="ques_wave_box ani_fadeinup ani_step02">
+            <div class="waveform_box">
+              <!-- wave surfer 영역 -->
+              <div id="waveform"></div>
+            </div>
+          </div>   
+          
+          <!-- 임시버튼 : 
+            질문 답변 형식2 섹션으로 이동, 
+            질문 답변 형식2의 타이머를 실행하고 있습니다.
+            개발단계에서 삭제해 주세요 -->
+          <button onclick="showPage(2,1); createWavsurfer('waveform02', 60)" class="btn_tempo btn_timer_start">임시버튼  다음 질문 보기</button>          
+        </div>
+        <!-- //질문 답변 형식1 -->
+
+        <!-- 질문 답변 형식2 -->
+        <div class="cont_element">
+          <div class="ani_fadeinup ani_step01">
+            <p class="tit_bd">질문 02.</p>
+            <p class="ques_desc">지원하게 된 동기는 무엇이며,<br> 자신이 지원한 직무를 성공적으로 수행할 수 있다고 생각하는 이유를 말해주세요.</p>
+          </div>
+          <div class="conts_box ani_fadeinup ani_step02">
+            <div class="conts_triple">
+              <div>
+                <div class="screen_area">
+                  <video id="camArea" width="550" height="412" autoplay></video>
+                </div>
+                <div class="wave_area">
+                  <div class="ico_circle"></div>
+                  <div class="wave_box">
+                    <!-- wave surfer 영역 -->
+                    <div id="waveform02"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="lottie_wave_answ">
+                <lottie-player class="ani_wave" src="/images/ani_wave.json"  speed="1"  style="width: 160px; height: 160px;" loop autoplay></lottie-player>                
+              </div>
+              <div class="check_right">
+                <!-- 생각시간 영역 -->
+                <div class="thinking_time">
+                  <div class="timer_wrap">
+                    <div class="timer_inner">
+                      <span class="tag_think">생각시간</span>
+                      <!-- timer -->
+                      <div id="countdownThink" class="countdown_num">30</div>
+                      <span class="txt_seconds">SECONDS</span>
+                    </div>
+                    <lottie-player class="ani_circle_blue" src="/images/ani_circle_blue.json"  speed="1"  style="width: 400px; height: 400px;" loop autoplay></lottie-player>  
+                  </div>
+                  <div class="btn_row_time">
+                    <button class="btn_stop_timer btn_blue_medium">생각시간 종료</button>
+                  </div>      
+                </div>   
+                <!-- //생각시간 영역 -->
+
+                <!-- 답변시간 영역 -->
+                <div class="answering_time">
+                  <div class="timer_wrap">
+                    <div class="timer_inner answ_timer_inner">
+                      <span class="tag_answer">답변시간</span>
+                      <!-- timer -->
+                      <div id="countdownAnswer" class="countdown_num">30</div>
+                      <span class="txt_seconds">SECONDS</span>                      
+                    </div>
+                    <lottie-player class="ani_circle_blue" src="/images/ani_circle_purple.json"  speed="1"  style="width: 400px; height: 400px;" loop autoplay></lottie-player>  
+                  </div>
+                  <p class="txt_answ_info">잠시 후 <b>답변 제출 버튼</b>이 활성화 됩니다.</p>
+                  <div class="btn_row_face btn_row_double">
+                    <button class="btn_restart btn_purple" >다시 시작하기</button>
+                    <button onclick="showPage(2,1)" class="btn_purple" disabled>답변 제출</button>
+                  </div>                    
+                </div>
+                <!-- //답변시간 영역 -->                
+              </div>       
+            </div>
+          </div>    
+          
+          <!-- 임시버튼 : 
+            성향분석 단계 시작 알림 섹션으로 이동, 
+            개발단계에서 삭제해 주세요 -->
+            <button onclick="showPage(3,2)" class="btn_timer_tncy btn_tempo">임시버튼  성향분석 시작 알림</button>           
+        </div>
+        <!-- //질문 답변 형식2 -->
+
+        <!-- 성향분석 단계 시작 알림 -->
+        <div class="cont_element">
+          <div class="noti_timer_wrap ani_fadeinup ani_step01">
+            <div class="noti_timer_inner">
+              <!-- timer -->
+              <div id="countdownNoti" class="countdown_noti">10</div>
+              <span class="txt_seconds">SECONDS</span>
+            </div>
+            <lottie-player class="ani_circle_noti" src="/images/ani_circle_blue.json"  speed="1"  style="width: 268px; height: 268px;" loop autoplay></lottie-player>              
+          </div>
+          <div class="txt_ani_row">
+            <div class="txt_wrap mt40">
+              <p class="wait_txt01">성향분석 단계가 곧 시작됩니다.</p>
+            </div>        
+          </div>
+          <div class="ani_fadeinup ani_step05">
+            <p class="finish_desc">수고 많으셨습니다! 10초 뒤 다음 화면으로 넘어갑니다.</p>
+            <p class="desc_caution">바로 넘어가고 싶으면 아래 버튼을 눌러주세요.</p>  
+            <div class="btn_row_double mt60">
+              <button class="btn_blue">다음 단계 시작하기</button>
+              <a href="/evaluation/finish.html">
+                <button class="btn_blue">지금은 여기까지만</button>
+              </a>
+            </div>              
+          </div>
+        </div>
+        <!-- //성향분석 단계 시작 알림 -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+
+    //header include
+    $("#header").load("/include/header.html");     
+
+    //gnb init
+    let showGnb = true;  
+    let onStep = 2;      
+
+    //순차적으로 컨텐츠 보여주기
+    let showHideEl = $('.cont_element');
+
+    function showPage(showIndex, hideIndex) {
+      showHideEl.eq(hideIndex).css('display', 'none');
+      showHideEl.eq(showIndex).css('display', 'block');
+    }
+
+    function showPageInit() {
+      showHideEl.eq(0).css('display', 'block');
+    }
+    showPageInit();     
+
+    //wave surfer 질문 답변 형식1  
+    function createWavsurfer(audioID, waveHeight) {
+      const wavesurfer = WaveSurfer.create({
+        container: '#' + audioID,
+        waveColor: '#628CF4',
+        barWidth: 2,
+        barHeight: 1, 
+        barGap: 2,
+        height: waveHeight,
+        plugins: [
+          WaveSurfer.microphone.create()
+        ]
+      });
+ 
+      wavesurfer.microphone.on('deviceReady', function() {
+        console.log('Microphone device is ready');
+      });   
+      wavesurfer.microphone.start();
+    }      
+
+    //webcam 인지해서 보여주기
+    function checkWebcamSupport() {
+      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        // startWebcam();
+      } else {
+        alert('Your browser does not support getUserMedia.');
+      }
+    }
+    function startWebcam(videoId) {
+      const video = document.getElementById(videoId);
+      navigator.mediaDevices.getUserMedia({ video: true })
+        .then((stream) => {
+          video.srcObject = stream;
+        })
+        .catch((error) => {
+          console.error('Error accessing webcam:', error);
+        });
+    }    
+    checkWebcamSupport();
+
+    // 생각시간 countdown timer
+    let timer1 = new easytimer.Timer();
+
+    timer1.addEventListener('secondsUpdated', function (e) {
+      var countdownElement = document.getElementById('countdownThink');
+      countdownElement.innerHTML = timer1.getTimeValues().seconds;
+    });
+
+    //timer 종료 이후
+    timer1.addEventListener('targetAchieved', function (e) {
+    });    
+
+    //임시버튼으로 카메라, 타이머 실행
+    $('.btn_timer_start').click(function() {
+      startWebcam('camArea');
+      timer1.start({
+        countdown: true, 
+        startValues: {seconds: 31}
+      });
+    })
+
+    //생각시간 종료
+    $('.btn_stop_timer').click(function() {
+      $('.thinking_time').css('display', 'none');
+      $('.answering_time').css('display', 'block');
+      timer2.start({
+        countdown: true, 
+        startValues: {seconds: 30}
+      });
+    })    
+
+    // 답변시간 countdown timer
+    let timer2 = new easytimer.Timer();
+    timer2.addEventListener('secondsUpdated', function (e) {
+      var countdownElement = document.getElementById('countdownAnswer');
+      countdownElement.innerHTML = timer2.getTimeValues().seconds;
+    });    
+
+    //timer 종료 이후
+    timer2.addEventListener('targetAchieved', function (e) {
+
+    });    
+
+    //카운트다운 재시작
+    $('.btn_restart').click(function() {
+      timer2.stop();
+      timer2.start({
+        countdown: true, 
+        startValues: {seconds: 30}
+      });
+    })    
+
+    //다음단계 알림 countdown timer
+    let timer3 = new easytimer.Timer();
+    timer3.addEventListener('secondsUpdated', function (e) {
+      var countdownElement = document.getElementById('countdownNoti');
+      countdownElement.innerHTML = timer3.getTimeValues().seconds;
+    });      
+
+    //임시버튼으로 타이머 실행
+    $('.btn_timer_tncy').click(function() {
+      timer3.start({
+        countdown: true, 
+        startValues: {seconds: 10}
+      });      
+    })
+
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">  
+  <title>성향분석 | inFACE - AI 면접솔루션</title>
+  <meta name="author" content="EDUCE(에듀스)">
+  <meta name="keywords" content="EDUCE, inFACE, AI 채용 대비 시뮬레이터, AI 자소서/면접 플랫폼">
+	<meta name="description" content="inFACE는 인공지능 기반으로 면접과 성향분석, 다면역량평가가 
+  가능한 플랫폼입니다.">
+  <meta name="twitter:title" content="inFACE - AI 면접솔루션">
+  <meta name="twitter:description" content="inFACE는 인공지능 기반으로 면접과 성향분석, 다면역량평가가 가능한 플랫폼입니다.">
+  <!-- 이미지 주소 수정해 주세요 -->
+  <!-- <meta name="twitter:image" content="http://code-heim.com/inFACE/images/img_sns.png"> -->
+  <meta property="og:title" content="inFACE - AI 면접솔루션">
+  <meta property="og:description" content="inFACE는 인공지능 기반으로 면접과 성향분석, 다면역량평가가 가능한 플랫폼입니다.">
+  <meta property="og:url" content="https://inface.ai/educe/evaluation">
+  <meta property="og:type" content="website">
+  <!-- 이미지 주소 수정해 주세요 -->
+  <!-- <meta property="og:image" content="http://code-heim.com/inFACE/images/img_sns.png"> -->
+  <link rel="shortcut icon" href="/images/favicon.ico">
+  <link rel="stylesheet" href="/css/common.css">
+  <script src="/js/jquery-3.4.1.min.js"></script>
+  <script src="../js/jquery.simple.timer.js"></script>
+</head>
+<body class="sol_body">
+  <!-- header include -->
+  <div id="header"></div>
+
+  <div class="wrapper">
+    <div class="inner">
+
+      <!-- 성향분석 시작 알림 -->
+      <div class="cont_element">
+        <div class="ani_fadeinup ani_step01">
+          <h2 class="page_tit tit_start_tncy">성향분석 단계가 곧 시작됩니다.</h2>
+        </div>
+        <div class="ani_fadeinup ani_step02">
+          <div class="desc_box_white desc_box_start">
+            <ul class="desc_li">
+              <li>성향분석은 지원자의 인성을 파악하는 것으로 정답이 따로 있는 것이 아닙니다.</li>
+              <li>다만, 신뢰도를 검증하기 위한 문항들이 포함되어 있으므로 성실히 답변해야 합니다.</li>
+              <li>총 110개의 질문중 10개의 질문이 한 화면에 보여지며, 총 10분의 권장시간이 주어집니다.</li>
+            </ul>
+            <p class="desc_answ">빠짐없이 모든 문항에 답변을 해야 하며 그렇지 않을 경우에는 결과에 불이익이 있을 수 있습니다.</p>
+          </div>
+          <p class="fnt_large mt40">모든 준비가 되었다면 아래의 <span class="clr_blue">예시 화면 보기 버튼</span>을 눌러 시작하면 됩니다.</p>
+        </div>
+        <div class="btn_row_single ani_fadeinup ani_step03">
+          <button onclick="showPage(1,0)" class="btn_blue btn_blue_large">예시 화면 보기</button>
+        </div>
+      </div>
+      <!-- //성향분석 시작 알림 -->
+
+      <!-- 성향 분석 예시 화면 -->
+      <div class="cont_element">
+        <div class="ani_fadeinup ani_step01">
+          <h2 class="page_tit tit_start_tncy">성향분석 단계가 곧 시작됩니다.</h2>
+        </div>   
+        <div class="ani_fadeinup ani_step02">
+          <div class="desc_box_white desc_box_start">
+            <ul class="desc_li">
+              <li>한 페이지에 4개의 질문이 1SET로 출제됩니다.</li>
+              <li>각 질문에 대해 5점 척도로 응답합니다.</li>
+              <li>그 다음 1~4번까지 지문 중에서 나와 가장 가까운(Most) 것과 가장 먼(Least) 것을 고릅니다.</li>
+            </ul>    
+            <p class="desc_answ mt20">한 페이지에 총 6개의 답을 골라야 하며, 다 고르지 않을 경우 다음 페이지로 넘어가지 않습니다.</p>     
+            <div class="ex_tncy mt20">
+              <img src="../images/ex_tncy.png" alt="성향 분석 예시">
+            </div>   
+          </div>   
+          <p class="fnt_large mt40">모든 준비가 되었다면 아래의 <span class="clr_blue">확인 버튼</span>을 눌러 시작하면 됩니다.</p> 
+        </div>
+        <div class="btn_row_single ani_fadeinup ani_step03">
+          <button onclick="showPage(2,1)" class="btn_blue btn_blue_large">확인</button>
+        </div>   
+      </div>
+      <!-- //성향 분석 예시 화면 -->
+
+      <!-- 성향 분석 -->
+      <div class="cont_element">
+        <div class="tncy_wrap">
+          <div class="tncy_info">
+            <div>
+              <span class="info_tit">남은 질문</span>
+              <span class="remain_ques_num">105</span>
+            </div>
+            <div class="timer_row">
+              <span class="info_tit">권장 시간</span>
+              <div id="timerQuestion" class="timer" data-minutes-left=2></div>
+              <!-- <div class='timer' data-seconds-left=180></div> -->
+            </div>
+          </div>
+          <div class="tncy_ques">
+            <!-- 각 문항 head 영역 -->
+            <div class="ques_hd">
+              <div class="ques_type01_hd">
+                <div class="ques_set">
+                  <p>SET1.</p>
+                  <p>각 문항이 본인의 성향과 얼마나 일치하는지를 보기에서 선택하세요.</p>
+                </div>
+                <ul class="answ_item">
+                  <li>전혀<br>그렇지 않다</li>
+                  <li>그렇지<br>않다</li>
+                  <li>보통이다</li>
+                  <li>그렇다</li>
+                  <li>매우 그렇다</li>
+                </ul>
+              </div>
+              <div class="ques_type02_hd">
+                <div>
+                  MOST
+                  <p class="expl expl01">4문항 중<br><span>가장 가까운</span><br>본인성향</p>
+                </div>
+                <div>
+                  LEAST
+                  <p class="expl expl02">4문항 중<br><span>가장 먼</span><br>본인성향</p>
+                </div>
+              </div>
+            </div>
+            <!-- //각 문항 head 영역 -->
+            
+            <!-- 각 문항 내용 영역 -->
+            <div class="ques_bd">
+              <!-- 문항 1줄 -->
+              <div class="ques-row">
+                <div class="ques_type01_bd">
+                  <div class="tncy_ques_desc">
+                    <span class="ques_num">1.</span>
+                    <span>처음 접해보는 새로운 경험·사물들에 다소 거부감이 있다.</span>
+                  </div>
+                  <ul class="answ_radio">
+                    <li>
+                      <label class="radio_label">
+                        <input type="radio" class="form_radio" name="tncyQues01" id="">
+                        <span class="checkmark"></span>
+                      </label> 
+                    </li>
+                    <li>
+                      <label class="radio_label">
+                        <input type="radio" class="form_radio" name="tncyQues01" id="">
+                        <span class="checkmark"></span>
+                      </label>                         
+                    </li>
+                    <li>
+                      <label class="radio_label">
+                        <input type="radio" class="form_radio" name="tncyQues01" id="">
+                        <span class="checkmark"></span>
+                      </label>                         
+                    </li>
+                    <li>
+                      <label class="radio_label">
+                        <input type="radio" class="form_radio" name="tncyQues01" id="">
+                        <span class="checkmark"></span>
+                      </label>                         
+                    </li>
+                    <li>
+                      <label class="radio_label">
+                        <input type="radio" class="form_radio" name="tncyQues01" id="">
+                        <span class="checkmark"></span>
+                      </label>                         
+                    </li>
+                  </ul>
+                </div>
+                <div class="ques_type02_bd">
+                  <!-- most area -->
+                  <div class="most_area">
+                    <label class="radio_label radio_label_most">
+                      <input type="radio" class="form_radio" name="most01" id="">
+                      <span class="checkmark"></span>
+                    </label>                      
+                  </div>
+                  <!-- //most area -->
+
+                  <!-- least area -->
+                  <div class="least_area">
+                    <label class="radio_label radio_label_least">
+                      <input type="radio" class="form_radio" name="least01" id="">
+                      <span class="checkmark"></span>
+                    </label>  
+                  </div>
+                  <!-- //least area -->
+                </div>
+              </div>
+              <!-- //문항 1줄 -->
+
+              <!-- 문항 1줄 -->
+              <div class="ques-row">
+                <div class="ques_type01_bd">
+                  <div class="tncy_ques_desc">
+                    <span class="ques_num">2.</span>
+                    <span>다른 사람들에 비해 일을 진행시키는 능력이 뛰어난 편이다.</span>
+                  </div>
+                  <ul class="answ_radio">
+                    <li>
+                      <label class="radio_label">
+                        <input type="radio" class="form_radio" name="tncyQues02" id="">
+                        <span class="checkmark"></span>
+                      </label> 
+                    </li>
+                    <li>
+                      <label class="radio_label">
+                        <input type="radio" class="form_radio" name="tncyQues02" id="">
+                        <span class="checkmark"></span>
+                      </label>                         
+                    </li>
+                    <li>
+                      <label class="radio_label">
+                        <input type="radio" class="form_radio" name="tncyQues02" id="">
+                        <span class="checkmark"></span>
+                      </label>                         
+                    </li>
+                    <li>
+                      <label class="radio_label">
+                        <input type="radio" class="form_radio" name="tncyQues02" id="">
+                        <span class="checkmark"></span>
+                      </label>                         
+                    </li>
+                    <li>
+                      <label class="radio_label">
+                        <input type="radio" class="form_radio" name="tncyQues02" id="">
+                        <span class="checkmark"></span>
+                      </label>                         
+                    </li>
+                  </ul>
+                </div>
+                <div class="ques_type02_bd">
+                  <!-- most area -->
+                  <div class="most_area">
+                    <label class="radio_label radio_label_most">
+                      <input type="radio" class="form_radio" name="most01" id="">
+                      <span class="checkmark"></span>
+                    </label>                      
+                  </div>
+                  <!-- //most area -->
+
+                  <!-- least area -->
+                  <div class="least_area">
+                    <label class="radio_label radio_label_least">
+                      <input type="radio" class="form_radio" name="least01" id="">
+                      <span class="checkmark"></span>
+                    </label>  
+                  </div>
+                  <!-- //least area -->
+                </div>
+              </div>
+              <!-- //문항 1줄 -->
+
+              <!-- 문항 1줄 -->
+              <div class="ques-row">
+                <div class="ques_type01_bd">
+                  <div class="tncy_ques_desc">
+                    <span class="ques_num">3.</span>
+                    <span>처음 접해보는 새로운 경험·사물들에 다소 거부감이 있다.</span>
+                  </div>
+                  <ul class="answ_radio">
+                    <li>
+                      <label class="radio_label">
+                        <input type="radio" class="form_radio" name="tncyQues03" id="">
+                        <span class="checkmark"></span>
+                      </label> 
+                    </li>
+                    <li>
+                      <label class="radio_label">
+                        <input type="radio" class="form_radio" name="tncyQues03" id="">
+                        <span class="checkmark"></span>
+                      </label>                         
+                    </li>
+                    <li>
+                      <label class="radio_label">
+                        <input type="radio" class="form_radio" name="tncyQues03" id="">
+                        <span class="checkmark"></span>
+                      </label>                         
+                    </li>
+                    <li>
+                      <label class="radio_label">
+                        <input type="radio" class="form_radio" name="tncyQues03" id="">
+                        <span class="checkmark"></span>
+                      </label>                         
+                    </li>
+                    <li>
+                      <label class="radio_label">
+                        <input type="radio" class="form_radio" name="tncyQues03" id="">
+                        <span class="checkmark"></span>
+                      </label>                         
+                    </li>
+                  </ul>
+                </div>
+                <div class="ques_type02_bd">
+                  <!-- most area -->
+                  <div class="most_area">
+                    <label class="radio_label radio_label_most">
+                      <input type="radio" class="form_radio" name="most01" id="">
+                      <span class="checkmark"></span>
+                    </label>                      
+                  </div>
+                  <!-- //most area -->
+
+                  <!-- least area -->
+                  <div class="least_area">
+                    <label class="radio_label radio_label_least">
+                      <input type="radio" class="form_radio" name="least01" id="">
+                      <span class="checkmark"></span>
+                    </label>  
+                  </div>
+                  <!-- //least area -->
+                </div>
+              </div>
+              <!-- //문항 1줄 -->
+
+              <!-- 문항 1줄 -->
+              <div class="ques-row">
+                <div class="ques_type01_bd">
+                  <div class="tncy_ques_desc">
+                    <span class="ques_num">4.</span>
+                    <span>정당한 대가나 보상이 없는 선행을 베푸는 데는 다소 소극적이다.</span>
+                  </div>
+                  <ul class="answ_radio">
+                    <li>
+                      <label class="radio_label">
+                        <input type="radio" class="form_radio" name="tncyQues04" id="">
+                        <span class="checkmark"></span>
+                      </label> 
+                    </li>
+                    <li>
+                      <label class="radio_label">
+                        <input type="radio" class="form_radio" name="tncyQues04" id="">
+                        <span class="checkmark"></span>
+                      </label>                         
+                    </li>
+                    <li>
+                      <label class="radio_label">
+                        <input type="radio" class="form_radio" name="tncyQues04" id="">
+                        <span class="checkmark"></span>
+                      </label>                         
+                    </li>
+                    <li>
+                      <label class="radio_label">
+                        <input type="radio" class="form_radio" name="tncyQues04" id="">
+                        <span class="checkmark"></span>
+                      </label>                         
+                    </li>
+                    <li>
+                      <label class="radio_label">
+                        <input type="radio" class="form_radio" name="tncyQues04" id="">
+                        <span class="checkmark"></span>
+                      </label>                         
+                    </li>
+                  </ul>
+                </div>
+                <div class="ques_type02_bd">
+                  <!-- most area -->
+                  <div class="most_area">
+                    <label class="radio_label radio_label_most">
+                      <input type="radio" class="form_radio" name="most01" id="">
+                      <span class="checkmark"></span>
+                    </label>                      
+                  </div>
+                  <!-- //most area -->
+
+                  <!-- least area -->
+                  <div class="least_area">
+                    <label class="radio_label radio_label_least">
+                      <input type="radio" class="form_radio" name="least01" id="">
+                      <span class="checkmark"></span>
+                    </label>  
+                  </div>
+                  <!-- //least area -->
+                </div>
+              </div>
+              <!-- //문항 1줄 -->                
+            </div>
+            <!-- //각 문항 내용 영역 -->
+            <div></div>
+          </div>
+          <div class="ques_paging">
+            <span>3</span>
+            <span>|</span>
+            <span>55</span>
+          </div>
+
+        </div>
+
+        <!-- 임시버튼 : 
+          공감능력 섹션으로 이동, 
+          개발단계에서 삭제해 주세요 -->
+          <a href="/evaluation/empathy.html">
+            <button class="btn_tempo">임시버튼 공감능력</button>             
+          </a>
+      </div>
+      <!-- //성향 분석 -->
+
+    </div>
+  </div>
+
+  <script>
+
+    //header include
+    $("#header").load("/include/header.html");       
+
+    //gnb init
+    let showGnb = true;  
+    let onStep = 3;
+
+    //순차적으로 컨텐츠 보여주기
+    let showHideEl = $('.cont_element');
+
+    function showPage(showIndex, hideIndex) {
+      showHideEl.eq(hideIndex).css('display', 'none');
+      showHideEl.eq(showIndex).css('display', 'block');
+    }
+
+    function showPageInit() {
+      showHideEl.eq(0).css('display', 'block');
+    }
+    showPageInit();        
+    
+
+    
+    //timer
+    $('.timer').startTimer({
+      //아래에 다음 문제페이지 이동 함수 추가하면 됨
+      onComplete: function(){
+        console.log('Complete');
+      }      
+    });
+
+  
+
+
+  </script>
+ 
+
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">  
+  <title>inFACE - AI 면접솔루션</title>
+  <meta name="author" content="EDUCE(에듀스)">
+  <meta name="keywords" content="EDUCE, inFACE, AI 채용 대비 시뮬레이터, AI 자소서/면접 플랫폼">
+	<meta name="description" content="inFACE는 인공지능 기반으로 면접과 성향분석, 다면역량평가가 
+  가능한 플랫폼입니다.">
+  <meta name="twitter:title" content="inFACE - AI 면접솔루션">
+  <meta name="twitter:description" content="inFACE는 인공지능 기반으로 면접과 성향분석, 다면역량평가가 가능한 플랫폼입니다.">
+  <!-- 이미지 주소 수정해 주세요 -->
+  <meta name="twitter:image" content="http://code-heim.com/images/sns_present.png">
+  <meta property="og:title" content="inFACE - AI 면접솔루션">
+  <meta property="og:description" content="inFACE는 인공지능 기반으로 면접과 성향분석, 다면역량평가가 가능한 플랫폼입니다.">
+  <meta property="og:url" content="https://inface.ai/educe/evaluation">
+  <meta property="og:type" content="website">
+  <!-- 이미지 주소 수정해 주세요 -->
+  <meta property="og:image" content="http://code-heim.com/images/sns_present.png">
+  <link rel="shortcut icon" href="/images/favicon.ico">
+  <link rel="stylesheet" href="/css/common.css">
+  <script src="/js/jquery-3.4.1.min.js"></script>
+</head>
+<body class="sol_body">
+  <!-- header include -->
+  <div id="header"></div>
+
+  <div class="wrapper">
+    <div class="inner">
+
+      <!-- 공감능력 단계 -->
+      <div class="empa_wrap ani_fadeinup ani_step01">
+        <ul class="game_step">
+          <li class="on">공감능력 단계 안내</li>
+          <li>검사 진행</li>
+          <li>검사 종료</li>
+        </ul>
+        <div class="game_conts">
+          <h2 class="page_tit02 page_tit_empathy">공감능력 단계가 곧 시작됩니다.</h2>
+          <div class="desc_box_gray">
+            <ul class="desc_li">
+              <li>공감능력 단계는 AI 게임을 통해 응시자의 공감능력 유형을 파악하게 됩니다.</li>
+              <li>이러한 분석은 정답이 따로 있는 것이 아니므로 성실히 임하기만 하면 됩니다.</li>
+              <li>총 4분간 2개의 AI게임이 진행됩니다.</li>
+            </ul>
+            <p class="desc_answ">불성실한 응시로 인한 결과로 불이익이 있을 수 있음을 유의해주시기 바랍니다.</p>
+          </div>
+          <p class="mt40">준비가 되었다면 아래의 <span class="clr_blue">시작 버튼</span>을 눌러 시작하면 됩니다.</p>
+          <div class="btn_row_single">
+            <button class="btn_dark_blue">시작</button>
+          </div>
+        </div>
+      </div>
+      <!-- //공감능력 단계 -->
+
+      <!-- 임시버튼 : 
+        의사결정 단계로 이동, 
+        개발단계에서 삭제해 주세요 -->
+        <a href="/evaluation/decision.html">
+          <button class="btn_tempo">임시버튼 의사결정</button>             
+        </a>      
+    </div>
+  </div>
+
+  <script>
+
+    //header include
+    $("#header").load("/include/header.html");   
+
+    //gnb init
+    let showGnb = true;  
+    let onStep = 4;
+
+  </script>
+
+</body>
+</html>

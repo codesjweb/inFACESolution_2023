@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">  
+  <title>AI게임 | inFACE - AI 면접솔루션</title>
+  <meta name="author" content="EDUCE(에듀스)">
+  <meta name="keywords" content="EDUCE, inFACE, AI 채용 대비 시뮬레이터, AI 자소서/면접 플랫폼">
+	<meta name="description" content="inFACE는 인공지능 기반으로 면접과 성향분석, 다면역량평가가 
+  가능한 플랫폼입니다.">
+  <meta name="twitter:title" content="inFACE - AI 면접솔루션">
+  <meta name="twitter:description" content="inFACE는 인공지능 기반으로 면접과 성향분석, 다면역량평가가 가능한 플랫폼입니다.">
+  <!-- 이미지 주소 수정해 주세요 -->
+  <meta name="twitter:image" content="http://code-heim.com/images/sns_present.png">
+  <meta property="og:title" content="inFACE - AI 면접솔루션">
+  <meta property="og:description" content="inFACE는 인공지능 기반으로 면접과 성향분석, 다면역량평가가 가능한 플랫폼입니다.">
+  <meta property="og:url" content="https://inface.ai/educe/evaluation">
+  <meta property="og:type" content="website">
+  <!-- 이미지 주소 수정해 주세요 -->
+  <meta property="og:image" content="http://code-heim.com/images/sns_present.png">
+  <link rel="shortcut icon" href="/images/favicon.ico">
+  <link rel="stylesheet" href="/css/common.css">
+  <script src="/js/jquery-3.4.1.min.js"></script>
+</head>
+<body class="sol_body">
+  <!-- header include -->
+  <div id="header"></div>
+
+  <div class="wrapper">
+    <div class="inner">
+      <!-- 게임안내 -->
+      <div class="cont_element ani_fadeinup ani_step01">
+        <ul class="game_step">
+          <li class="on">게임 안내</li>
+          <li>게임 진행</li>
+          <li>게임 종료</li>
+        </ul>
+        <div class="game_conts">
+          <h2 class="page_tit02 page_tit_game">AI 게임 안내입니다.</h2>
+          <p class="desc_gray">AI게임은 제시되는 게임을 수행하는 과정에서 지원자의 무의식적 행동 및 수행결과를 분석하여 지원자의 역량(계획, 추론, 판단, 멀티테스킹, 인지지각 등)을 측정하고 직무수행에 필요한 인성 및 인지능력 보유여부를 판단합니다.</p>
+          <div class="desc_box_gray mt20">
+            <p class="desc_add">제시되는 대분류에서 각 1개씩 사용자가 선택한 5개의 게임을 진행하게 됩니다.</p>
+            <ul class="desc_li">
+              <li>각 게임마다 진행 방법에 대한 안내와 예시가 있으므로 반드시 게임 방법을 이해하고 응시하여야 합니다.</li>
+              <li>게임 진행중 예기치 못한 오류로 게임이 완료되지 않았다면 중단했던 게임부터 다시 할 수 있습니다.</li>
+              <li>각 게임은 정답이 있는 것과 정답 없이 성향을 파악하기 위한 것이 섞여 있습니다.</li>
+            </ul>
+            <p class="desc_answ">게임 전에 키보드, 마우스가 정상적으로 작동하는지 확인하려면 우측 상단 [환경설정]을 눌러 테스트를 해주시기 바랍니다.</p>
+          </div>
+          <p class="mt40">준비가 되었다면 아래의 <span class="clr_blue">다음 버튼</span>을 눌러 시작하면 됩니다.</p>
+          <div class="btn_row_single mt40">
+            <button onclick="showPage(1,0)" class="btn_dark_blue">다음</button>
+          </div>
+        </div>
+      </div>
+      <!-- //게임안내 -->
+
+      <!-- 게임목록 -->
+      <div class="cont_element">
+        <ul class="game_step">
+          <li class="on">게임 안내</li>
+          <li>게임 진행</li>
+          <li>게임 종료</li>
+        </ul>
+        <div class="game_conts">
+          <h2 class="page_tit02 page_tit_game">게임 목록</h2>
+          <p class="desc_gray tac">진행할 게임목록입니다.</p>
+          <ul class="game_list_ai">
+            <li>
+              <p class="game_txt">계획</p>
+              <p class="game_tit">그림비교</p>
+              <p class="game_txt02">약 4분 | 키보드 사용</p>
+              <div class="game_ai_ico">
+                <img src="/images/ico_game_picture.png" alt="">
+              </div>
+            </li>
+            <li>
+              <p class="game_txt">추론</p>
+              <p class="game_tit">클립 맞히기</p>
+              <p class="game_txt02">약 4분 | 키보드 사용</p>
+              <div class="game_ai_ico">
+                <img src="/images/ico_game_clip.png" alt="">
+              </div>
+            </li>
+            <li>
+              <p class="game_txt">문제해결</p>
+              <p class="game_tit">신호등</p>
+              <p class="game_txt02">약 4분 | 키보드 사용</p>
+              <div class="game_ai_ico">
+                <img src="/images/ico_game_traffic.png" alt="">
+              </div>
+            </li>
+            <li>
+              <p class="game_txt">판단</p>
+              <p class="game_tit">블록 방향</p>
+              <p class="game_txt02">약 4분 | 키보드 사용</p>
+              <div class="game_ai_ico">
+                <img src="/images/ico_game_block.png" alt="">
+              </div>
+            </li>
+            <li>
+              <p class="game_txt">멀티테스킹</p>
+              <p class="game_tit">도형비교</p>
+              <p class="game_txt02">약 4분 | 키보드 사용</p>
+              <div class="game_ai_ico">
+                <img src="/images/ico_game_shape.png" alt="">
+              </div>
+            </li>
+            <li>
+              <p class="game_txt">인지지각</p>
+              <p class="game_tit">N-Back게임</p>
+              <p class="game_txt02">약 4분 | 키보드 사용</p>
+              <div class="game_ai_ico">
+                <img src="/images/ico_game_back.png" alt="">
+              </div>
+            </li>
+          </ul>
+          <p class="mt60">준비가 되었다면 아래의 <span class="clr_blue">다음 버튼</span>을 눌러 시작하면 됩니다.</p>
+          <div class="btn_row_single mt40">
+            <button class="btn_dark_blue">다음</button>
+          </div>
+        </div>
+
+        <!-- 임시버튼 : 
+          심층면접 단계로 이동, 
+          개발단계에서 삭제해 주세요 -->
+        <a href="/evaluation/depthInterview.html">
+          <button class="btn_tempo">임시버튼 심층면접</button>             
+        </a>        
+
+      </div>
+      <!-- //게임목록 -->        
+    </div>
+  </div>
+
+  <script>
+
+    //header include
+    $("#header").load("/include/header.html");      
+
+    //gnb init
+    let showGnb = true;  
+    let onStep = 5;
+
+    //순차적으로 컨텐츠 보여주기
+    let showHideEl = $('.cont_element');
+
+    function showPage(showIndex, hideIndex) {
+      showHideEl.eq(hideIndex).css('display', 'none');
+      showHideEl.eq(showIndex).css('display', 'block');
+    }
+    function showPageInit() {
+      showHideEl.eq(0).css('display', 'block');
+    }
+    showPageInit();    
+
+  </script>
+
+</body>
+</html>

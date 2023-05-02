@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">  
+  <title>inFACE - AI 면접솔루션</title>
+  <meta name="author" content="EDUCE(에듀스)">
+  <meta name="keywords" content="EDUCE, inFACE, AI 채용 대비 시뮬레이터, AI 자소서/면접 플랫폼">
+	<meta name="description" content="inFACE는 인공지능 기반으로 면접과 성향분석, 다면역량평가가 
+  가능한 플랫폼입니다.">
+  <meta name="twitter:title" content="inFACE - AI 면접솔루션">
+  <meta name="twitter:description" content="inFACE는 인공지능 기반으로 면접과 성향분석, 다면역량평가가 가능한 플랫폼입니다.">
+  <!-- 이미지 주소 수정해 주세요 -->
+  <meta name="twitter:image" content="http://code-heim.com/images/sns_present.png">
+  <meta property="og:title" content="inFACE - AI 면접솔루션">
+  <meta property="og:description" content="inFACE는 인공지능 기반으로 면접과 성향분석, 다면역량평가가 가능한 플랫폼입니다.">
+  <meta property="og:url" content="https://inface.ai/educe/evaluation">
+  <meta property="og:type" content="website">
+  <!-- 이미지 주소 수정해 주세요 -->
+  <meta property="og:image" content="http://code-heim.com/images/sns_present.png">
+  <link rel="shortcut icon" href="/images/favicon.ico">
+  <link rel="stylesheet" href="/css/common.css">
+  <script src="/js/jquery-3.4.1.min.js"></script>
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="/js/face-api.js"></script>
+  <script src="/js/wavesurfer.js"></script>
+  <script src="/js/wavesurfer.microphone.min.js"></script>
+</head>
+<body class="sol_body">
+
+    <!-- header include -->
+    <div id="header"></div>
+
+    <div  class="wrapper">
+      <div class="inner">
+
+        <!-- 기본 정보 -->
+        <div class="cont_element">
+          <div class="ani_fadeinup ani_step01">
+            <p class="tit_bd">기본 정보</p>
+            <h2 class="page_tit">테스트 제목과 직무를 입력해주세요.</h2>
+            <p class="page_desc">사용자의 기본 정보를 입력하는 단계입니다.<br> 테스트 제목을 입력해주시고, 직무는 직접입력 또는 선택할 수 있습니다.</p>
+          </div> 
+          <div class="basic_box ani_fadeinup ani_step02">
+            <div class="basic_inner">
+              <div class="basic_tit">테스트 제목</div>
+              <div>
+                <input type="text" class="form_input" placeholder="테스트 제목을 입력해 주세요">
+              </div>
+              <div class="basic_tit mt30">직무 선택</div>
+              <div class="search_row">
+                <div class="search_box">
+                  <input type="text" class="search_input form_input">
+                  <ul class="suggest_li">
+                    <li>경제</li>
+                    <li>경영 분석</li>
+                    <li>경영 분석 지원</li>
+                    <li>경제</li>
+                  </ul>
+                </div>
+                <button class="btn_search">찾아보기</button>
+              </div>
+              <p class="txt_info_blue">원하는 직무를 찾지 못하셨을 경우, 직접 입력해 주세요.</p>
+
+              <div class="mt40">
+                <button onclick="showPage(1,0)" class="btn_next_scanface btn_blue_100">확인</button>
+              </div>
+            </div>
+          </div>         
+        </div>
+        <!-- //기본 정보 -->
+
+        <!-- 생체 정보 얼굴 인식 -->
+        <div class="cont_element">
+          <div class="ani_fadeinup ani_step01">
+            <p class="tit_bd">생체 정보</p>
+            <h2 class="page_tit">얼굴 인식을 시작합니다</h2>
+            <p class="page_desc">사용자의 얼굴을 인식하는 단계입니다.<br> 얼굴을 네모 박스 안에 위치 시키고 아래 얼굴 인식 버튼을 누르고 조금 기다려 주세요.</p>  
+          </div>
+          <div class="conts_box ani_fadeinup ani_step02">
+            <div class="conts_triple">
+              <div>
+                <div class="screen_area">
+                  <video id="faceCamArea" width="550" height="412" autoplay></video>
+                  <canvas id="myCanvas" style="position: absolute; top: 0; left: 0;"></canvas>
+                  <!-- 얼굴인식 시작 버튼 -->
+                  <span class="btn_scan_box scan_start">
+                    <button class="btn_scan">
+                      <span>얼굴인식 시작</span>
+                    </button>
+                  </span>
+                  <!-- 얼굴인식 진행중 버튼  -->
+                  <span class="btn_scan_box scan_ing">
+                    <button class="btn_scan_ing">
+                      <lottie-player class="ani_spinner" src="/images/ani_spinner.json" speed="1" style="width: 24px; height: 24px;" autoplay loop></lottie-player>   
+                      <span>얼굴인식 진행중</span>
+                    </button>
+                  </span>
+                  <!-- 얼굴인식 성공 버튼 -->
+                  <span class="btn_scan_box scan_done" >
+                    <button class="btn_scan_done">
+                      <lottie-player class="ani_check" src="/images/ani_check.json"  speed="1"  style="width: 24px; height: 24px;" autoplay></lottie-player>                        
+                      <span>얼굴인식 성공</span>
+                    </button>
+                  </span>
+                </div>
+                <!-- 얼굴인식 단계에서 wavesurfer 는 실행하지 않았음 -->
+                <div class="wave_area">
+                  <div class="ico_circle"></div>
+                  <div></div>
+                </div>
+              </div>
+              <div class="lottie_wave">
+                <lottie-player class="ani_wave" src="/images/ani_wave.json"  speed="1"  style="width: 160px; height: 160px;" loop autoplay></lottie-player>                
+              </div>
+              <div class="check_right">
+                <div class="face_result">
+                  <div class="after_scan"></div>
+                  <div class="before_scan"></div>
+                </div>
+                <div class="btn_row_face btn_row_double">
+                  <button class="btn_next_scansound btn_scan_check btn_blue" disabled>확인</button>
+                  <button onclick="showPage(2,1)" class="btn_next_scansound btn_blue">넘어가기</button>
+                </div>                
+              </div>
+            </div>
+          </div>    
+        </div>
+        <!-- //생체 정보 얼굴 인식 -->        
+
+        <!-- 생체 정보 음성 인식 -->
+        <div class="cont_element">
+          <div class="ani_fadeinup ani_step01">
+            <p class="tit_bd">생체 정보</p>
+            <h2 class="page_tit">음성 인식을 시작합니다</h2>
+            <p class="page_desc">사용자의 음성을 인식하는 단계입니다.<br> 아래 음성 인식 버튼을 누른 뒤, 표시되는 문장을 읽어 주세요. 소리가 너무 작지 않도록 해주세요.</p>  
+          </div>   
+          <div class="conts_box ani_fadeinup ani_step02">
+            <div class="conts_triple">
+              <div>
+                <div class="screen_area">
+                  <!-- 음성인식 섹션에서는 얼굴인식 기능은 넣지 않았습니다. -->
+                  <video id="soundCamArea" width="550" height="412" autoplay></video>
+                  <!-- 음성인식 시작 버튼 -->
+                  <span class="btn_scan_box scan_sound_start">
+                    <button class="btn_scan_sound">
+                      <span>음성인식 시작</span>
+                    </button>
+                  </span>
+                  <!-- 음성인식 진행중 버튼  -->
+                  <span class="btn_scan_box scan_sound_ing">      
+                    <button class="btn_scan_ing">
+                      <lottie-player class="ani_spinner" src="/images/ani_spinner.json" speed="1" style="width: 24px; height: 24px;" autoplay loop></lottie-player>   
+                      <span>음성인식 진행중</span>
+                    </button>                    
+                  </span>            
+                  <!-- 음성인식 성공 버튼 -->
+                  <span class="btn_scan_box scan_sound_done">
+                    <button class="btn_scan_done">
+                      <lottie-player class="ani_check" src="/images/ani_check.json"  speed="1"  style="width: 24px; height: 24px;" autoplay></lottie-player>                        
+                      <span>음성인식 성공</span>
+                    </button>
+                  </span>     
+                </div>
+                <div class="wave_area">
+                  <div class="ico_circle"></div>
+                  <div class="wave_box">
+                    <!-- wave surfer 영역 -->
+                    <div id="waveform"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="lottie_wave_sound">
+                <lottie-player class="ani_wave" src="/images/ani_wave.json"  speed="1"  style="width: 160px; height: 160px;" loop autoplay></lottie-player>                 
+              </div>
+              <div class="check_right">
+                <div class="sound_box">
+                  <p class="sound_txt01">만나서 반가워요.<br> 저는 면접을 보고 싶어요.</p>
+                  <p class="sound_txt02">위의 글자를 따라 읽어서 문장을 완성해 주세요.</p>
+                </div>
+                <div class="btn_row_face btn_row_double">
+                  <button class="btn_scan_sound_check btn_blue" disabled>확인</button>
+                  <button onclick="showPage(3,2)" class="btn_blue">넘어가기</button>
+                </div>                  
+              </div>
+            </div>
+          </div>       
+        </div>
+        <!-- 생체 정보 음성 인식 -->    
+        
+        <!-- 기본 면접 시작 알림 -->
+        <div class="cont_element">
+          <div class="wave_circle_box">
+            <div class="wave_circle"></div>
+            <div class="wave_inner ani_fadeinup ani_step01">
+              <img src="/images/wave.svg" alt="">
+            </div>
+          </div>
+          <div class="txt_ani_row">
+            <div class="txt_wrap">
+              <p class="wait_txt01">곧 기본 면접이 시작됩니다.</p>
+            </div>
+          </div>
+          <p class="wait_txt02 ani_fadeinup ani_step05">잠시만 기다려 주세요.<br> 편히 준비하시고 면접에 참여해 주시기 바랍니다.</p>
+
+          <!-- 임시버튼 : 안면등록 섹션으로 이동, 
+            개발단계에서 삭제해 주세요 -->
+          <a href="/evaluation/interview.html">
+            <button class="btn_tempo">임시버튼  기본 면접안내</button>          
+          </a>
+
+        </div>
+        <!-- //기본 면접 시작 알림 -->   
+      </div>
+    </div>
+
+    <!-- 지원분야 선택 modal -->
+    <div class="modal_wrap" id="jopList">
+      <div class="modal_cont w924 pb40">
+        <div class="modal_close"></div>
+        <div class="modal_inner">
+          <p class="modal_tit">지원분야 선택</p>
+          <p class="modal_desc">아래 보기에서 해당 직무 분야 > 상세직무 > 상세 직무결과를 선택하고 확인버튼을 눌러주세요.</p>
+          <div id="pageWrap" class="job_list">
+            <ul class="job_list_tit">
+              <li>직무 분야</li>
+              <li>상세 직무</li>
+              <li>상세 직무 결과</li>
+            </ul>
+            <div class="job_list_area">
+              <div>
+                <!-- job list 1depth -->
+                <ul class="ul_depth1">
+                  <li v-for='(v,i) in depth1DataList' :class="{selected: i==depth1Index}" @click='clickDepth1(v,i)'>{{v}}</li>
+                </ul>
+                <!-- //job list 1depth -->
+              </div>
+              <div>
+                <!-- job list 2depth -->
+                <ul class="ul_depth2">
+                  <li v-for='(v,i) in depth2DataList' :class="{selected: i==depth2Index}" @click='clickDepth2(v,i)'>{{v}}</li>
+                </ul>
+                <!-- //job list 2depth -->
+              </div>
+              <div>
+                <!-- job list 3depth -->
+                <ul class="ul_depth3">
+                  <li v-for='(v,i) in depth3DataList' :class="{selected: i==depth3Index}" @click='clickDepth3(v,i)'>{{v}}</li>
+                </ul>
+                <!-- //job list 3depth -->
+              </div>
+            </div>
+            <div class="job_result_wrap">
+              <div class="job_select_result">
+                <p class="select_depth1">{{depth1Key}}</p>
+                <p class="select_depth2">{{depth2Key}}</p>
+                <p class="select_depth3">{{depth3Key}}</p>
+              </div>
+            </div>
+          </div> 
+          <div class="btn_row_single">
+            <button class="btn_blue">확인</button>
+          </div>           
+        </div>
+      </div>
+    </div>
+    <!-- //지원분야 선택 modal -->
+
+  <script>
+
+    //header include
+    $("#header").load("/include/header.html");    
+
+    //gnb init
+    let showGnb = true;  
+    let onStep = 1;      
+
+    //순차적으로 컨텐츠 보여주기
+    let showHideEl = $('.cont_element');
+
+    function showPage(showIndex, hideIndex) {
+      showHideEl.eq(hideIndex).css('display', 'none');
+      showHideEl.eq(showIndex).css('display', 'block');
+    }
+
+    function showPageInit() {
+      showHideEl.eq(0).css('display', 'block');
+    }
+    showPageInit();    
+
+    //modal
+    $('.btn_search').click(function() {
+      $('#jopList').css('display', 'block')
+    })
+
+    $('.modal_close').click(function() {
+      $('.modal_wrap').css('display', 'none')
+    })    
+
+    //job list
+    new Vue({
+        el : '#pageWrap',        
+        created() {          
+          this.init()
+        },
+        data() {
+          return {
+            jobField: {        
+              //1depth data
+              'root': [
+                '경영.인사.총무.재무.사무', '마케팅.광고.홍보.PR', '전문.특수.자격직', '무역.유통.물류.운수', '영업.판매.TM.CS.상담', '생산.제조.기술.기능.연구개발', '건설.건축.토목.환경', '인터넷.프로그래밍.시스템', 'CG.편집.패션디자인', '이벤트.여행.외식.시설관리', '연출.촬영.기자.작가.연예', '교육.교사.강사.교직원'
+              ],
+              
+              //2depth data [key: 1depth 텍스트]
+              '경영.인사.총무.재무.사무': [
+                '경영전략.기획.조사.분석', '사무.총무.법무.특허', '경리.회계.세무.결산', '재무.IR.자금.감사', '인사.인재개발.채용.교육.HR', '일반사무.사무지원.문서작성'
+              ],
+              '마케팅.광고.홍보.PR': [
+                '브랜드.마케팅전략', '홍보.PR.사보', '광고.광고기획.AE', '리서치.조사분석.통계', '이벤트.프로모션'
+              ],
+              '전문.특수.자격직': [
+                '법률.법무.특허.상표', '외국어.번역.통역', '증권.자산관리.외환.투자', '컨설팅.경영분석.자문', '간호사.간호조무사.치료.위생사', '식품.조리.영양.제과제빵', 'MD.상품기획', '부동산중개.감정평가.경매', '사회복지.상담.자원봉사'
+              ],
+              '무역.유통.물류.운수': [
+                '무역.수출입.해외영업', '구매.자재.재고관리', '상품입출고.물류.유통관리', '배송.운전.택배'
+              ],
+              '영업.판매.TM.CS.상담': [
+                '제조.건설.유통.서비스영업', '금융.보험영업', '기술영업(IT.솔루션)', '광고영업', '영업관리.영업기획.영업지원', '판매.매장관리.캐셔', 'TM.아웃바운드.해피콜', 'CS.인바운드.고객지원.상담', '홍보상담·단순홍보·고객관리', '교육상담.학원운영관리'
+              ],
+              '생산.제조.기술.기능.연구개발': [
+                '기술.연구개발.R&D', '설계.CAD·CAM', '생산관리.공정관리.품질관리', '생산.기능.조립.제조.포장', '기계.금속.금형.용접.도금', '전기기술.제어.전자.회로', 'A/S.정비.설치.수리', 
+              ],
+              '건설.건축.토목.환경': [
+                '건축설계.인테리어.시공', '토목.조경.측량.구조', '시설.환경.플랜트', '전기.소방.설비', '건설사무.감리.안전.검사'
+              ],
+              '인터넷.프로그래밍.시스템': [
+                '웹기획.웹마케팅.PM', '콘텐츠.사이트운영', '웹디자인.HTML코딩', '웹프로그래밍', '응용프로그래밍', '시스템프로그래밍', '서버.SE.보안.네트워크.LAN', '시스템분석.설계.DB', '하드웨어설계.개발.유지보수', '게임기획.개발.운영(GM)', '모바일.유무선.통신'
+              ],
+              'CG.편집.패션디자인': [
+                '시각.광고.그래픽(CG)디자인', '편집(MAC/IBM).출판디자인', '제품.산업디자인', '패션.의류.잡화디자인'
+              ],
+              '이벤트.여행.외식.시설관리': [
+                '여행.관광.레저.스포츠', '호텔.리조트.콘도.팬션', '외식.서빙.주방', '경비.보안.경호.시큐리티', '건물.시설관리.주차관리'
+              ],
+              '연출.촬영.기자.작가.연예': [
+                '연출.PD.감독', '방송진행.아나운서.리포터', '촬영.사진.영상편집', '기자(신문.방송.잡지)', '매니저.스텝.연예.공연'
+              ],
+              '교육.교사.강사.교직원': [
+                'IT.컴퓨터.디자인강사', '교사.교수(유치원초중고대학교)'
+              ],
+              
+              //3depth data [key: 2depth 텍스트]
+              '경영전략.기획.조사.분석': [
+                '기획', '전략기획', '사업기획', '사업제휴', '기획조사', '경영기획', '경영혁신', '조직관리', '서비스기획', '타당성분석', '리서치', '모니터링',
+              ],
+              '사무.총무.법무.특허':  [
+                '총무', '관리', '사무관리', '사무보조', '일반사무', '문서관리', '자산관리', '경영지원', 'OA', '자료입력', '전산입력', '행정', '복리후생관리', '법무', '특허', '공무', '인허가업무', 'DM발송',
+              ],
+              '경리.회계.세무.결산':  [
+                '경리', '회계', '세무', '결산', '원가회계', '관리회계', '재무회계', '회계감사', '예산관리', '더존', '전산회계', 'ERP운용', '급여관리', '4대보험', '기장', '출납', '전표입력', '부가세신고', '판매관리', 'CPA', 'AICPA',
+              ], 
+              '재무.IR.자금.감사':  [
+                '자금', '재무', 'IR.주식', '외환', '공시', '감사', 'IPO', 'CFA', 'CPA', 'AICPA', 'CFO', '내부관리', '재무회계', '재무기획',              
+              ], 
+              '인사.인재개발.채용.교육.HR':  [
+                '인사(HRM)','인사기획', '인재개발', '채용', '교육(HRD)', '노사관리', '급여관리', '성과관리', '목표관리', '변화관리', '노무', '인재파견관리', '복리후생',
+              ], 
+              '일반사무.사무지원.문서작성': [
+                '정보처리', '워드', '엑셀', '파워포인트', '전산입력.편집', '문서입력.관리', '일반사무', '사무보조', '홈페이지관리', 'OA', 'DM발송', '사서', '문서작성', '전산회계', '더존',                
+              ],
+              
+              '브랜드.마케팅전략': [
+                '마케팅', '마케팅기획', '마케팅전략', '브랜딩', '브랜드매니저', '제휴마케팅', '해외마케팅', '입소문마케팅', '온라인마케팅', '스포츠마케팅', '상품기획.MD', 'CRM', 'CMO', '라이센싱', 'IMC', '캠페인 제작(ART)', '글로벌 비즈니스 공통',
+              ], 
+              '홍보.PR.사보': [
+                '홍보', '언론홍보', '홍보기획', 'PR', '사보제작', '사보기자',
+              ], 
+              '광고.광고기획.AE': [
+                '광고', '광고기획', '광고관리', 'AE', '카피라이터', '광고제작', '아트디렉터', 'CM플래너', 'PPL', 'Sign', '브랜딩', '포지셔닝',
+              ], 
+              '리서치.조사분석.통계': [
+                '시장조사', '시장분석', '리서치', '통계', 'SPSS', 'SAS', '조사분석', 
+              ], 
+              '이벤트.프로모션': [
+                '이벤트', '프로모션', 
+              ],              
+              '법률.법무.특허.상표': [
+                '변호사', '법무사', '변리사', '법률서비스', '노무사', '특허출원', '상표출원', 'ISO인증', '지적재산권', '사무장', '법학전공', '등기업무', '법무대리', '상표대리',
+              ], 
+              '외국어.번역.통역': [
+                '번역', '통역', '관광통역', '영어', '일본어', '중국어', '프랑스어', '독일어', '러시아어', '스페인어', '포르투갈어', '베트남어', '태국어', '폴란드어', '아랍어', '말레이.인니어',
+              ], 
+              '증권.자산관리.외환.투자': [
+                '금융', '은행', '기업심사', '손해사정', '행원', '채권추심.관리', 'PB', '외환딜러.관리', '증권', '애널리스트', '투자상담', '펀드매니저', '국제금융', '금융자산관리', '선물중개', '방카슈랑스', '보험영업', '보험설계', '보험계리', '보험중계', '자산관리', '기업금융', '리스크매니저', '재정분석.설계', '금융상품개발', '감사', '신용카드', '공인회계사', '텔러', '신용평가', '캐피탈', '종합금융', '여신',
+              ], 
+              '컨설팅.경영분석.자문': [
+                '경영분석', '경영기획', '컨설팅', '경영컨설팅', '금융컨설팅', '창업컨설팅', '부동산컨설팅', '매너컨설팅', '웹컨설팅', 'HR컨설팅', '이미지컨설팅', '기업심사', '투자유치', 'MBA', 'M&A', 'IR', '애널리스트', '헤드헌터',
+              ], 
+              '간호사.간호조무사.치료.위생사': [
+                '의사', '한의사', '치과의사', '약사', '간호사', '간호조무사', '심리치료사', '응급구조사', '운동처방사', '병원.의약사무', '조산사', '병원코디네이터', '치기공사', '치위생사', '물리치료사', '임상병리사', '방사선사', '요양보호사', '위생사', '피부관리사', '간병인', '안경사', '수의사'
+              ], 
+              '식품.조리.영양.제과제빵': [
+                '조리사', '요리사', '제과.제빵', '영양사', '한식', '양식', '중식', '일식', '주방장', 'Chef', '주방보조', '바텐더', '바리스타', '푸드스타일', '홀써빙', '지배인', '찬모',
+              ], 
+              'MD.상품기획': [
+                '상품기획', '상품개발', 'MD', '소비재MD', '생산재MD', '섬유.패션MD', 'VMD', '소재디자이너', '패션디자이너',
+              ], 
+              '부동산중개.감정평가.경매': [
+                '부동산컨설팅', '감정평가사', '분양상담사', '공인중개사', '부동산경매', '경매입찰', '분양홍보', '상가', '임대컨설팅', '부동산개발', '창업컨설팅',
+              ], 
+              '사회복지.상담.자원봉사': [
+                '사회복지', '상담사', '심리상담', '심리치료사', '직업.취업상담', '자원봉사',
+              ],              
+              
+              '무역.수출입.해외영업': [
+                '무역', '무역사무', '무역영어', '수출입사무', '통관', '바이어상담', '오더관리', '바이어관리', '바이어개발', '해외마케팅', '해외무역', '해외영업', '해운', '포워딩', 'LC', 'MR.MD', '선적', '영어', '일본어', '중국어', '프랑스어', '독일어', '러시아어', '스페인어', '포르투갈어', '베트남어', '태국어', '폴란드어', '아랍어', '말레이.인니어', '외환관리',
+              ], 
+              '구매.자재.재고관리': [
+                '구매관리', '재고관리', '창고관리', '자재관리', '자재구매', '외자구매', '자재통합', '자재구매기획', '건설자재', '외주기획', '소모성자재', 'SCM'
+              ], 
+              '상품입출고.물류.유통관리': [
+                '상품입출고', '유통', '유통관리', '물류', '물류센터', '국제물류', '해상운송', '항공운송', '보세운송', '통관대리', '무역중개',
+              ], 
+              '배송.운전.택배': [
+                '배송', '운송', '퀵서비스', '화물차운전', '택배기사', '포장이사', '중장비운전', '버스기사', '택시기사', '승용기사', '지게차운전', '납품', '수행기사', '대리운전', '학원차', '물류관리', '재고관리', '창고관리', '이삿짐센터',
+              ],            
+              '제조.건설.유통.서비스영업': [
+                '일반영업', '국내영업', '제약영업', '자동차영업', '장비영업', '의료기영업', '화장품영업', '법인영업', '납품영업', '중고차딜러', '주류영업', '해외영업', '영업관리', '거래선개발', '광고영업', '고객관리', '영업기획', '기술영업', '식품영업', '상조영업', '슈퍼바이저', '프랜차이즈',
+              ], 
+              '금융.보험영업': [
+                '증권', '투자상담', '금융자산관리사', '보험설계', '보험영업', 'PB', '방카슈랑스', '여신상담', '금융영업', '자산관리', '재무상담', '텔러', '법인고객영업', '개인고객영업', '대출영업', '카드영업', 'FC', '금융상담', '대출상담', '대출심사', '담보상담', '퇴직연금', '금융사무',
+              ], 
+              '기술영업(IT.솔루션)': [
+                '기술영업', '기술지원', '솔루션영업', '시스템영업', '네트워크영업', '사이트구축영업', '하드웨어영업', '의료기기영업', '전자기기영업', '자동화설비영업',
+              ], 
+              '광고영업': [
+                '광고영업', '온라인광고영업', '매체광고영업', '옥외광고', '키워드광고', '지역광고', '지하철광고', '버스광고',
+              ], 
+              '영업관리.영업기획.영업지원': [
+                '영업기획', '매출분석.관리', '거래선개발관리', '영업관리', '고객관리', '외주관리', '납품관리', '영업지원', '채권관리', '대리점관리', '가맹점관리', '프랜차이즈관리',
+              ], 
+              '판매.매장관리.캐셔': [
+                '판매', '판매관리', '매장관리', '매장시설관리', '캐셔', '할인매장', '백화점', '대리점', '로드샵', '쇼핑몰', '마트', '샵마스터', '의류판매', '화장품판매', '도서판매', '가전판매', '잡화판매', '식품판매', '컴퓨터판매', '통신기기판매', '사무용품판매', '꽃판매', '프런트', '예약', 'PC방', '주차정산원', '카원터계산원', '요금수납원', '홀직원',
+              ], 
+              'TM.아웃바운드.해피콜': [
+                '아웃바운드', 'TM', '해피콜', '콜센터', '인터넷.통신', '키워드광고', '신문.방송', '홈쇼핑', '쇼핑몰', '제조.기술', '방송.미디어', '택배.운송', '백화점.마트', '은행.증권', '신용카드', '보험회사', '채권추심', '학습지.출판', '학원.유학원', '항공.여행', '호텔.콘도', '레저.스포츠', '부동산', '회원관리', '결혼.웨딩', '상조',
+              ], 
+              'CS.인바운드.고객지원.상담': [
+                'CS', '인바운드', '고객상담', '고객지원', '고객응대', '회원관리', 'QA', '콜센터', '인터넷.통신', '키워드광고', '신문.방송', '홈쇼핑', '쇼핑몰', '제조.기술', '방송.미디어', '택배.운송', '백화점.마트', '은행.증권', '신용카드', '보험회사', '채권추심', '학습지.출판', '학원.유학원', '항공.여행', '호텔.콘도', '레저.스포츠', '부동산', '결혼.웨딩', '상조',
+              ], 
+              '홍보상담·단순홍보·고객관리': [
+                '홍보상담', '단순홍보', '제품홍보', '서비스홍보', '회원관리', '고객관리', '리서치',
+              ], 
+              '교육상담.학원운영관리': [
+                '교육상담', '회원관리', '회원유치', '수강생관리', '학원에이전트', '프로그램상담', '안내상담', '유학.연수상담'
+              ],             
+              '기술.연구개발.R&D': [
+                '기술직', '연구원', 'R&D(연구개발)', '기술연구소', 'CTO', '반도체', '정보통신.IT', '의료', '제약', '환경', '화학', '전기.전자', '원자력', '생명공학', '기계', '금속', '식품', '실험', '기구설계', '회로설계', '제품개발', '생산기술', '연구관리', '메카트로닉스', '에너지', '조선', '철강', '건설', '건축', '펌웨어', '목재', '제지', 'LCD', '제어', '플랜트', '금형설계', 'RF', 'CATIA', '인프라', '공통(CE/IM/전사직속)', 'SW 아카데미-CE/IM/전사직속', 'SW 아카데미-DS', '공통(CE/IM/전사직속)-디자인(제품)', '공통(CE/IM/전사직속)-소프트웨어',
+              ], 
+              '설계.CAD·CAM': [
+                'CAD', '건축설계', 'CAM', 'AutoCAD', '기계.기구설계', '조경설계', '조선설계', '토목설계', '금형설계', '3D설계', 'Pro-e', 'CATIA', '인테리어설계', '자동차설계', '전기설계', '모형설계',
+              ], 
+              '생산관리.공정관리.품질관리': [
+                '생산', '품질', '생산관리', '품질관리', '품질보증', '품질검사', '제품시험', '자재관리', '공정관리', '안전', '환경관리', '원가관리', 'ISO', '공정', 'TPM', '6시그마', '공장장', 'QA', 'HACCP', '미생물실험',
+              ], 
+              '생산.기능.조립.제조.포장': [
+                '기능직', '생산직', '공예', '금속', '기계', '회로', '설비', '용접', '인쇄', '운전', '유리', '조립', '제본', '포장', '그라인딩', '사출', '제관', '제조', '도금', '밀링', '절단', '절곡', '연마', '연삭', '코팅', '와이어', '방전', '염색',
+              ], 
+              '기계.금속.금형.용접.도금': [
+                '기계', '금속', '금형설계', '용접', '도금', '밀링', '절단', '절곡', '연마', '연삭', '코팅', '와이어', '방전',
+              ], 
+              '전기기술.제어.전자.회로': [
+                '전기기기', '전자기기', '자동제어', '전기공사', '전기회로', '전기설비', '전기설계', '전기기술', '전기기사', '배선', '발전', '전자', 'PLC', '전자회로', '전장', 'HMI.MMI', 'PCB', 'SMPS', 'SMT', '하드웨어', '펌웨어', 'RF', 'SEM.TEM', 'Micom', '광학',
+              ], 
+              'A/S.정비.설치.수리': [
+                '수리', '정비', '검사', '기계설치정비', '전기.전자기기', '컴퓨터조립수리', '자동차정비', '시설관리', '튜닝', 'A/S', '유지보수', '기술지원', '설치', '에어컨', '정수기', '도장', '판금'
+              ],             
+              
+              '건축설계.인테리어.시공': [
+                '건축설계', '실내디자인', '인테리어', '실내건축', 'CAD', '리모델링', '시공.공사', '현장관리', '전시디자인', '3DMax', '도면작업',
+              ], 
+              '토목.조경.측량.구조': [
+                '조경', '도시', '도로.상하수도', '교량.가설', '토목기사', '토목계측', '토목설계', '토목시공', '측량.계측', '조경설계', '구조공학', '도시계획.교통', '국토이용계획', '토목감리', '골조공사', '지도제도',
+              ], 
+              '시설.환경.플랜트': [
+                '시설', '환경', '환경기사', '플랜트', '건설안전', '수질환경', '산업안전', '대기환경', '환경영향평가', '소음진동', '폐기물처리', '건설자재연구',
+              ], 
+              '전기.소방.설비': [
+                '전기', '전기배선', '전기설비', '전기설계', '전기계장', '전기안전', '전기감리', '설비공사', '통신설비', '소방설비', '소방.방화관리', '기계설비', '건축설비', '공조냉동'
+              ], 
+              '건설사무.감리.안전.검사': [
+                '건축감리', '건축시공', '공무', '사무', '관리', '현장소장', '현장관리', '견적', '입찰', '자재', '안전', '품질', '건설노무', '인테리어', '토목감리', '설계감리', '공사감리', '시공감리',
+              ],
+              
+              
+              '웹기획.웹마케팅.PM': [
+                '웹기획', '웹PD', '웹마케팅', 'PM', '웹프로모션', '웹광고기획', '정보설계', '스토리보드', '컨텐츠기획', '키워드광고', '웹서비스기획', '온라인마케팅', '커뮤니티기획', 'UI.IA 설계',
+              ], 
+              '콘텐츠.사이트운영': [
+                '사이트운영', '테스트', '콘텐츠운영관리', '커뮤니티운영관리', '헬프데스크', '콘텐츠개발', 'e러닝', '디버깅',
+              ], 
+              '웹디자인.HTML코딩': [
+                '웹디자인', '정보설계', '포토샵', '플래쉬', 'HTML(코딩)', '드림위버', '나모', '파이어웍스', '자바스크립트', '인터페이스디자인', '스위시', 'XML', 'UI디자인', '일러스트레이터', '아바타', '웹UI', '모바일UI', '액션스크립트', '온라인광고디자인',
+              ], 
+              '웹프로그래밍': [
+                '웹프로그래머', 'ASP', 'JSP', 'JAVA', 'Servlet', 'CORBA', 'PHP', 'CGI', 'XML', 'SQL', 'MySQL', 'WML', 'HTML', 'mHTML', 'SCJP', '.NET', 'EJB', 'VRML', 'VB.NET', 'APM', 'AJAX', 'MS-SQL', 'WinForm', 'HDML',
+              ], 
+              '응용프로그래밍': [
+                '응용프로그래머', '전산전공', 'WindowsMobile', 'Windows', 'Unix', 'Linux', 'VisualC', 'VisualC++', 'VisualBasic', 'C', 'C++', 'MFC', 'PowerBuilder', 'Java', 'Delphi', 'SQL', '4GL', 'Oracle', 'CTI', 'Win32', 'CICS', '.NET', 'Tuxedo', 'ActiveX', 'Pro-C', 'C++Builder', 'C#Builder', 'C#', '액션스크립트', '플래시APP', 'VB.NET', 'SAP', 'ABAP', 'Embedded', 'ASP.NET', 'VoIP', 'DirectX', 'API', 'Fortran', 'Borland', 'forms', 'D2K', '아이폰', '안드로이드',
+              ], 
+              '시스템프로그래밍': [
+                '시스템프로그래머', '어셈블리', '임베디드', 'HMI', 'MMI', 'PLC',
+              ], 
+              '서버.SE.보안.네트워크.LAN': [
+                '서버관리자', '전자상거래', '네트워크관리', '방화벽', '정보보안', 'LAN', '서버구축', '데이터베이스', 'MCSE', 'DBA', 'Unix', 'Linux', 'Windows2000', 'Apache', 'IIS', 'SQL', 'Oracle', 'OCP', 'DB2', 'CCNA', '네트워크엔지니어', 'Solaris', 'Cisco', '보안관리', '보안관제', '보안기술', '시스템운영',
+              ], 
+              '시스템분석.설계.DB': [
+                '요구분석', '시스템분석', '시스템설계', '모델링', 'PM', '튜닝', 'DBA', '시스템엔지니어', 'Oracle DB', 'MS-SQL', 'MySQL', 'SE', 'DB2', 'mSQL',
+              ], 
+              '하드웨어설계.개발.유지보수': [
+                '마이크로프로세서', '하드웨어', '회로설계', '펌웨어', 'PCB', '어셈블리', 'VoIP', 'PDA', '유지보수', 'AS', '임베디드', 'ASIC', 'DSP', 'Micom', 'FPGA', 'RF',
+              ], 
+              '게임기획.개발.운영(GM)': [
+                '게임기획', '게임마케팅', '게임운영.관리', 'GM', '콘텐츠기획', '게임음악.음향', '캐릭터.아이템', '게임시나리오', '프로게이머', '베타테스터', '게임디자인', '2D디자인(도트)', '3D디자인(모델링)', 'Flash게임', 'Java게임', '모바일게임', '온라인게임', '게임개발', '멀티미디어',
+              ], 
+              '모바일.유무선.통신': [
+                '통신기술', '정보통신', '전자통신', '무선통신', '위성통신', '광통신', '이동통신', '모바일통신', 'ADSL', 'HFC', 'CCTV', 'GIS.GPS', 'CDMA', 'GSM.GVM', 'VoIP', 'RF', '통신공사', '와이브로', '유비쿼터스', '블루투스', 'iPhone', 'WIPI', 'WAP', 'PDA', 'RFID', '네트워크엔지니어'
+              ],
+              
+              '시각.광고.그래픽(CG)디자인': [
+                '그래픽디자인', '시각디자인', '광고디자인', '3D', '3DMax', 'Maya', '일러스트레이터', '포토샵', '디렉터', 'CG', '코렐드로우', '도트디자인', 'CI.BI', 'POP.SIGN', '백터3D', 'GUI',
+              ], 
+              '편집(MAC/IBM).출판디자인': [
+                '편집디자인.MAC', '북디자인', 'MAC디자인', '퀵익스프레스', '잡지편집', '카탈로그편집', '편집디자인.IBM',
+              ], 
+              '제품.산업디자인': [
+                '제품디자인', '산업디자인', '팬시.문구', '공업디자인', '포장.패키지', '공간디자인', '금속디자인', '공예디자인', '가구디자인', '조명디자인', 'POP.SIGN', '쥬얼리디자인', '잡화디자인', '액세서리디자인', '벽지.패턴디자인', 'GUI',
+              ], 
+              '패션.의류.잡화디자인': [
+                '패션디자인', '의상디자인', '잡화디자인', '섬유디자인', '벽지.패턴', '액세서리', '남성의류', '여성의류', '속옷', '유아.아동복', 'VMD', '디스플레이', '코디네이터', '피팅모델', '핸드백.가방', '지갑.벨트', '니트디자인', '넥타이디자인', '드레스디자인', '골프웨어', '데님.청바지', '신발.구두', '귀금속디자인', '유니폼.단체복', '영캐주얼디자인',
+              ],
+              
+              '여행.관광.레저.스포츠': [
+                '여행사', '여행사무', '게임.놀이시설', '여행상품개발', '관광', '관광통역', '발권사무', '여행가이드', 'OP', '항공승무원', '선박승무원', '골프캐디', '조종사.승무원', '비자수속', '여권발급', '레저', '레크레이션', '스포츠', '레포츠',
+              ], 
+              '호텔.리조트.콘도.팬션': [
+                '호텔', '호텔프론트사무', '호텔지배인', '객실팀', '카지노', '숙박시설', '콘도', '팬션', '캐셔', '벨맨.벨보이', '하우스키핑', '프론트', '리조트',
+              ], 
+              '외식.서빙.주방': [
+                '지배인', '서비스', '매니져', '캡틴', '캐셔', '웨이터', '웨이트리스', '홀써빙', '바텐더', '조리사', '요리사', '주방장', 'Chef', '바리스타', '푸드스타일', '주방보조', '소믈리에', '파티쉐', '제과제빵',
+              ], 
+              '경비.보안.경호.시큐리티': [
+                '보안', '경호', '경비.순찰', '아파트경비', '매장경비', '청원경찰', '현금수송', '시큐리티', 'CCTV', '보안검색',
+              ], 
+              '건물.시설관리.주차관리': [
+                '건물관리', '주차관리', '주차안내', '안전관리', '시설관리', '기계관리', '전기관리', '방재관리', '환경관리', '신호관제', '교통관제', '항공관제', '산업안전'
+              ],
+              
+              '연출.PD.감독': [
+                'PD.연출', 'AD.조연출', 'FD.연출보조', '방송기획', '방송제작', '방송편성',
+              ], 
+              '방송진행.아나운서.리포터': [
+                '아나운서', '앵커', '리포터', '기상캐스터', 'MC.VJ', '쇼호스트', '웹자키', '성우.더빙', '외화번역',
+              ], 
+              '촬영.사진.영상편집': [
+                '카메라', '방송카메라기사', '영상편집', '프리미어', '방송기술', '촬영보조', '영사기사', '조명기사', '방송미술', '음향.녹음', '방송CG', '포토샵', '사진촬영기사', '사진관', '스튜디오',
+              ], 
+              '기자(신문.방송.잡지)': [
+                '기자', '신문기자', '방송기자', '잡지기자', '사진기자', '취재기자', '촬영기자', '편집기자', '인터넷기자', '잡지.사보기자', '교열기자',
+              ], 
+              '매니저.스텝.연예.공연': [
+                '공연기획', '공연예술', '극단.연극', '소극장', '콘서트홀', '오페라단', '문화.예술', '공연스텝', '무대제작', '특수효과', '오퍼레이터', '엑스트라', '영사기사', '스크립터', '연예기획사', '매니저', '로드매니저', '코디네이터', '메이크업', '탤런트', '배우', '개그맨', '모델', '가수.댄서', '연기자', '에이전트',
+              ],
+              
+              'IT.컴퓨터.디자인강사': [
+                'OA', '인터넷', '웹디자인', '프로그램', 'DB.시스템', '웹마스터', '영상.3D', '하드웨어',
+              ], 
+              '교사.교수(유치원초중고대학교)': [
+                '대학교수', '대학강사', '초등교사', '중고등교사', '기간제교사', '보육.유치원교사', '특수학교교사'
+              ],             
+            },
+
+            depth1Index: 0,
+            depth2Index: 0,
+            depth3Index: 0,
+
+            depth1Key: null,
+            depth2Key: null,
+            depth3Key: null,
+
+            depth1DataList: null,
+            depth2DataList: null,
+            depth3DataList: null,
+          }
+        },
+
+        methods: {        
+          init() {
+            this.depth1DataList = this.jobField.root
+            this.depth2DataList = this.jobField[this.jobField.root[this.depth1Index]],
+            this.depth3DataList = this.jobField[this.jobField[this.jobField.root[this.depth2Index]][this.depth3Index]]
+
+            this.depth1Index = 0
+            this.depth2Index = 0
+            this.depth3Index = 0
+
+            this.depth1Key = this.depth1DataList[0]
+            this.depth2Key = this.depth2DataList[0]
+            this.depth3Key = this.depth3DataList[0]
+          },          
+
+          clickDepth1(v,i) {
+            this.depth1Index = i;
+            this.depth1Key = v
+            this.depth2DataList = this.jobField[this.depth1Key]
+
+            this.depth2Index = 0;
+            this.depth2Key =  this.depth2DataList[0]
+
+            this.depth3DataList = this.jobField[this.depth2Key]
+            this.depth3Index = 0;
+            this.depth3Key =  this.depth3DataList[0]
+          },
+
+          clickDepth2(v,i) {
+            this.depth2Index = i;
+            this.depth2Key = v
+
+            this.depth3DataList = this.jobField[this.depth2Key]
+
+            this.depth3Index = 0;
+            this.depth3Key =  this.depth3DataList[0]
+          },
+
+          clickDepth3(v,i) {
+            this.depth3Index = i;
+            this.depth3Key = v;
+          }
+        }
+    });
+
+    //webcam 인지해서 보여주기
+    function checkWebcamSupport() {
+      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        // startWebcam();
+      } else {
+        alert('Your browser does not support getUserMedia.');
+      }
+    }
+    function startWebcam(videoId) {
+      const video = document.getElementById(videoId);
+      navigator.mediaDevices.getUserMedia({ video: true })
+        .then((stream) => {
+          video.srcObject = stream;
+        })
+        .catch((error) => {
+          console.error('Error accessing webcam:', error);
+        });
+    }    
+    checkWebcamSupport();
+
+    //얼굴인식으로 넘어가면서 실행
+    $('.btn_next_scanface').click(function() {
+      startWebcam('faceCamArea');
+    })
+
+    //음성인식으로 넘어가면서 실행
+    $('.btn_next_scanface').click(function() {
+      startWebcam('soundCamArea');
+    })
+
+    //얼굴인식
+    async function start_face_detect() {
+      console.log(faceapi.nets)
+      await faceapi.nets.ssdMobilenetv1.loadFromUri('../models')
+      
+      const input = document.getElementById('faceCamArea')
+      let detections = []
+      let detect_score = 0.0
+
+      detections = await faceapi.detectAllFaces(input)
+      console.log('detections:', detections)
+
+      if( detections.length > 0) {
+        console.log(detections[0]._score)
+
+        const displaySize = { width: input.width, height: input.height }
+        const canvas = document.getElementById('myCanvas')
+        faceapi.matchDimensions(canvas, displaySize)
+        const resizedDetections = faceapi.resizeResults(detections, displaySize)
+        faceapi.draw.drawDetections(canvas, resizedDetections)
+
+        console.log('face detect success !')
+
+        //얼굴 인식 성공 이후
+        $('.lottie_wave').css('display', 'none');
+        $('.scan_ing').css('display', 'none');
+        $('.scan_done').css('display', 'block');
+        $('.before_scan').addClass('success');
+        $('.btn_scan_check').prop('disabled', false);
+
+      } else {
+        console.log('fail')
+      }
+    }    
+
+    //얼굴인식 버튼 클릭
+    $('.btn_scan').click(function() {
+      $('.lottie_wave').css('display', 'block');
+      $('.scan_start').css('display', 'none');
+      $('.scan_ing').css('display', 'block');
+      start_face_detect();
+    })
+
+    //wave surfer
+    function createWavsurfer() {
+       
+       const wavesurfer = WaveSurfer.create({
+         container: '#waveform',
+         waveColor: '#628CF4',
+         barWidth: 2,
+         barHeight: 1, 
+         barGap: 2,
+         height: 60,
+         plugins: [
+           WaveSurfer.microphone.create()
+         ]
+       });
+ 
+       wavesurfer.microphone.on('deviceReady', function() {
+         console.log('Microphone device is ready');
+         $('.scan_sound_ing').css('display', 'none');
+         $('.scan_sound_done').css('display', 'block');
+         $('.lottie_wave_sound').css('display', 'none');
+         $('.btn_scan_sound_check').prop('disabled', false);
+       });   
+       
+       wavesurfer.microphone.start();
+     }    
+
+     //음성인식 버튼 클릭
+     $('.btn_scan_sound').click(function() {
+      createWavsurfer();
+      $('.scan_sound_start').css('display', 'none');
+      $('.scan_sound_ing').css('display', 'block');
+      $('.lottie_wave_sound').css('display', 'block');
+    })    
+
+  </script>
+
+</body>
+</html>
